@@ -365,6 +365,71 @@ body::before {
   line-height:1.4; max-width:280px; margin:0 auto;
 }
 
+/* OS View */
+.os-section { margin-bottom:24px; }
+.os-day-header {
+  display:flex; align-items:center; gap:10px; margin-bottom:10px;
+}
+.os-day-dot {
+  width:10px; height:10px; border-radius:4px; flex-shrink:0;
+}
+.os-day-dot.mon { background:var(--blue); }
+.os-day-dot.tue { background:var(--purple); }
+.os-day-dot.wed { background:var(--mint); }
+.os-day-dot.thu { background:var(--amber); }
+.os-day-dot.fri { background:var(--red); }
+.os-day-name {
+  font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700;
+  letter-spacing:2px; text-transform:uppercase; color:var(--text);
+}
+.os-day-sub {
+  font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--text-dim);
+  letter-spacing:1px; margin-left:auto;
+}
+.os-block {
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+  padding:12px 14px; margin-bottom:4px;
+}
+.os-time {
+  font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--mint);
+  letter-spacing:0.5px; margin-bottom:4px;
+}
+.os-desc {
+  font-size:13px; color:var(--text-mid); line-height:1.45;
+}
+.os-rule-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+  padding:14px 16px; margin-bottom:6px;
+}
+.os-rule-card .os-desc { color:var(--text); font-weight:500; font-size:13px; }
+.os-decision-card {
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+  padding:14px 16px; margin-bottom:6px;
+}
+.os-q {
+  font-size:13px; font-weight:600; color:var(--text); margin-bottom:6px;
+}
+.os-a {
+  font-size:12px; color:var(--text-mid); line-height:1.45;
+}
+.os-edit-area {
+  display:none; width:100%; min-height:300px; padding:16px;
+  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
+  color:var(--text); font-family:'DM Sans',sans-serif; font-size:13px;
+  line-height:1.6; outline:none; resize:vertical;
+}
+.os-edit-area.show { display:block; }
+.os-formatted.hide { display:none; }
+.os-edit-toggle {
+  display:flex; gap:8px; margin-bottom:20px;
+}
+.os-edit-btn {
+  flex:1; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border);
+  background:var(--surface); color:var(--text-mid); font-family:'JetBrains Mono',monospace;
+  font-size:10px; letter-spacing:1px; cursor:pointer; text-align:center; transition:all 0.15s;
+}
+.os-edit-btn.active { background:var(--mint); color:var(--bg); border-color:var(--mint); }
+
 /* Edit mode indicator */
 .edit-banner {
   display:none; background:rgba(247,166,59,0.1); border:1px solid rgba(247,166,59,0.3);
@@ -391,6 +456,7 @@ body::before {
       <button class="tab" data-tab="friday">FRI</button>
       <button class="tab" data-tab="dash">DASH</button>
       <button class="tab" data-tab="history">LOG</button>
+      <button class="tab" data-tab="os">OS</button>
     </div>
   </div>
 
@@ -510,6 +576,134 @@ body::before {
       <div class="empty-state"><div class="empty-icon">📚</div><p>Weekly reports appear here. Build the streak.</p></div>
     </div>
   </div>
+  <!-- ===== OS — OPERATING SYSTEM ===== -->
+  <div class="view" id="viewOs">
+    <div class="os-edit-toggle">
+      <button class="os-edit-btn active" id="osViewBtn" onclick="osMode('view')">VIEW</button>
+      <button class="os-edit-btn" id="osEditBtn" onclick="osMode('edit')">EDIT</button>
+    </div>
+
+    <div id="osFormatted" class="os-formatted">
+      <!-- THE IDEAL WEEK -->
+      <div style="text-align:center;margin-bottom:24px;">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--mint);margin-bottom:4px;">SCRIVEN HOEFS</div>
+        <div style="font-size:22px;font-weight:800;letter-spacing:-0.5px;">Operating System</div>
+        <div style="font-size:11px;color:var(--text-dim);margin-top:4px;">Weekly Structure, Metrics & Accountability</div>
+      </div>
+
+      <div class="sec-head"><div class="sec-dot embark"></div><div class="sec-label">1. The Ideal Week</div></div>
+
+      <!-- MONDAY -->
+      <div class="os-section">
+        <div class="os-day-header">
+          <div class="os-day-dot mon"></div>
+          <div class="os-day-name">Monday</div>
+          <div class="os-day-sub">Plan + Build</div>
+        </div>
+        <div class="os-block"><div class="os-time">8:00–8:30</div><div class="os-desc">Weekly planning. Review scorecard from last Friday. Set 3–5 priorities. No email.</div></div>
+        <div class="os-block"><div class="os-time">8:30–11:00</div><div class="os-desc">DEEP WORK BLOCK. Embark list building (now through May), Reso sales system architecture, or Magnum outreach prep. Pick ONE per Monday. Do not split it.</div></div>
+        <div class="os-block"><div class="os-time">11:00–12:00</div><div class="os-desc">Flex. Respond to anything urgent from the morning.</div></div>
+        <div class="os-block"><div class="os-time">12:00–1:00</div><div class="os-desc">Lunch.</div></div>
+        <div class="os-block"><div class="os-time">1:00–3:00</div><div class="os-desc">Reso or Embark working sessions. Proposals, strategy docs, CRM setup, VA management. Thinking work, not calls.</div></div>
+        <div class="os-block"><div class="os-time">3:00–4:30</div><div class="os-desc">Admin overflow, Slack, quick responses.</div></div>
+      </div>
+
+      <!-- TUESDAY -->
+      <div class="os-section">
+        <div class="os-day-header">
+          <div class="os-day-dot tue"></div>
+          <div class="os-day-name">Tuesday</div>
+          <div class="os-day-sub">Call Day</div>
+        </div>
+        <div class="os-block"><div class="os-time">8:00–8:30</div><div class="os-desc">Prep for calls. Review who you're talking to and what you want from each conversation.</div></div>
+        <div class="os-block"><div class="os-time">8:30–12:00</div><div class="os-desc">Standing calls: Reso leadership, LHR leadership, Roar. Plus prospect/networking calls.</div></div>
+        <div class="os-block"><div class="os-time">12:00–1:00</div><div class="os-desc">Lunch.</div></div>
+        <div class="os-block"><div class="os-time">1:00–4:30</div><div class="os-desc">Discovery calls, follow-ups, warm intro asks, closing conversations. This is your high-I day. Go be Scriven.</div></div>
+      </div>
+
+      <!-- WEDNESDAY -->
+      <div class="os-section">
+        <div class="os-day-header">
+          <div class="os-day-dot wed"></div>
+          <div class="os-day-name">Wednesday</div>
+          <div class="os-day-sub">Personal + W2</div>
+        </div>
+        <div class="os-block"><div class="os-desc">Doctor appointments, 3M obligations, recovery, massage. Protect this day. If nothing is scheduled, use it as a bonus deep work day but don't make that the expectation. You need the reset.</div></div>
+      </div>
+
+      <!-- THURSDAY -->
+      <div class="os-section">
+        <div class="os-day-header">
+          <div class="os-day-dot thu"></div>
+          <div class="os-day-name">Thursday</div>
+          <div class="os-day-sub">Build + Overflow</div>
+        </div>
+        <div class="os-block"><div class="os-time">8:00–11:00</div><div class="os-desc">DEEP WORK BLOCK #2. Same rules as Monday. Phone off, no Slack.</div></div>
+        <div class="os-block"><div class="os-time">11:00–12:00</div><div class="os-desc">Flex.</div></div>
+        <div class="os-block"><div class="os-time">12:00–1:00</div><div class="os-desc">Lunch.</div></div>
+        <div class="os-block"><div class="os-time">1:00–3:00</div><div class="os-desc">Call overflow. Networking calls that couldn't fit Tuesday go here.</div></div>
+        <div class="os-block"><div class="os-time">3:00–4:30</div><div class="os-desc">VA check-in, pipeline review, prep for next week's closes.</div></div>
+      </div>
+
+      <!-- FRIDAY -->
+      <div class="os-section">
+        <div class="os-day-header">
+          <div class="os-day-dot fri"></div>
+          <div class="os-day-name">Friday</div>
+          <div class="os-day-sub">Close the Loop</div>
+        </div>
+        <div class="os-block"><div class="os-time">8:00–10:00</div><div class="os-desc">Admin. Emails, asset management, RV park, personal property. Get it done and contained.</div></div>
+        <div class="os-block"><div class="os-time">10:00–11:00</div><div class="os-desc">Fill in weekly scorecard. Honest numbers only.</div></div>
+        <div class="os-block"><div class="os-time">11:00–12:00</div><div class="os-desc">One strategic task you didn't finish, OR take the half day.</div></div>
+        <div class="os-block"><div class="os-desc" style="color:var(--mint);font-weight:600;">Afternoon: Off if possible. You earn this by executing Monday–Thursday.</div></div>
+      </div>
+
+      <!-- NON-NEGOTIABLE RULES -->
+      <div style="margin-top:32px;">
+        <div class="sec-head"><div class="sec-dot discipline"></div><div class="sec-label">Non-Negotiable Rules</div></div>
+        <div class="os-rule-card"><div class="os-desc">Monday and Thursday 8–11am are sacred. No calls. No Slack. No exceptions.</div></div>
+        <div class="os-rule-card"><div class="os-desc">Networking calls go on Tuesday or Thursday 1–3pm. If both are full, the call waits until next week.</div></div>
+        <div class="os-rule-card"><div class="os-desc">Every call request gets filtered: does this person have providers, hotel/STR owners, or knowledge I can't Google? If no, decline or cap at 15 minutes.</div></div>
+        <div class="os-rule-card"><div class="os-desc">30-minute max for networking calls. Book 30, end at 20 if there's nothing left.</div></div>
+        <div class="os-rule-card"><div class="os-desc">LHR stays under 5 hours per week. Period.</div></div>
+        <div class="os-rule-card"><div class="os-desc">Friday admin stays in the 8–10am box. It does not expand.</div></div>
+      </div>
+
+      <!-- DECISION RULES -->
+      <div style="margin-top:32px;">
+        <div class="sec-head"><div class="sec-dot reso"></div><div class="sec-label">Decision Rules</div></div>
+        <div style="font-size:12px;color:var(--text-dim);margin-bottom:12px;">Reference these when you're tempted to deviate.</div>
+
+        <div class="os-decision-card">
+          <div class="os-q">Should I take this call/meeting?</div>
+          <div class="os-a">Does this person have providers in their network, hotel/STR owners in their network, or knowledge I can't Google? If no → decline or 15 min max.</div>
+        </div>
+        <div class="os-decision-card">
+          <div class="os-q">Should I get involved in this Reso ops issue?</div>
+          <div class="os-a">Can my team solve it without me in the next 48 hours? If yes → don't touch it. If no → spend max 2 hours, then hand it back.</div>
+        </div>
+        <div class="os-decision-card">
+          <div class="os-q">Should I spend time on this LHR thing?</div>
+          <div class="os-a">Is it an acquisition or a project worth $50k+ in value? If no → delegate. If yes → bring it to your weekly planning block.</div>
+        </div>
+        <div class="os-decision-card">
+          <div class="os-q">Should I pursue this new opportunity?</div>
+          <div class="os-a">Does it directly feed Embark revenue, Reso revenue, or net worth growth? If no → say no. You are not allowed to add a 6th plate.</div>
+        </div>
+        <div class="os-decision-card">
+          <div class="os-q">Magnum: Stay or Kill?</div>
+          <div class="os-a">60-day clock starts when the portal is live. 10 active ordering providers by deadline or it's done. No negotiating with yourself.</div>
+        </div>
+      </div>
+    </div>
+
+    <textarea class="os-edit-area" id="osEditArea"></textarea>
+
+    <div id="osEditActions" style="display:none;margin-top:12px;">
+      <button class="btn-primary btn-mint" onclick="saveOsEdits()">Save Changes</button>
+    </div>
+  </div>
+
 </div>
 
 <!-- SCREENSHOT REPORT OVERLAY -->
@@ -540,7 +734,7 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
   t.classList.add('active');
-  const map={monday:'Monday',friday:'Friday',dash:'Dash',history:'History'};
+  const map={monday:'Monday',friday:'Friday',dash:'Dash',history:'History',os:'Os'};
   document.getElementById('view'+map[t.dataset.tab]).classList.add('active');
 }));
 
@@ -810,6 +1004,104 @@ function closeReport(){
   document.body.style.overflow='';
 }
 
+// OS View
+const OS_KEY = 'scriven_os_content';
+function osMode(mode){
+  const formatted = document.getElementById('osFormatted');
+  const area = document.getElementById('osEditArea');
+  const actions = document.getElementById('osEditActions');
+  const viewBtn = document.getElementById('osViewBtn');
+  const editBtn = document.getElementById('osEditBtn');
+
+  if(mode==='edit'){
+    // If user has saved custom content, load that; otherwise scrape formatted view
+    const saved = localStorage.getItem(OS_KEY);
+    if(saved){
+      area.value = saved;
+    } else {
+      area.value = formatted.innerText;
+    }
+    formatted.classList.add('hide');
+    area.classList.add('show');
+    actions.style.display='block';
+    viewBtn.classList.remove('active');
+    editBtn.classList.add('active');
+  } else {
+    formatted.classList.remove('hide');
+    area.classList.remove('show');
+    actions.style.display='none';
+    viewBtn.classList.add('active');
+    editBtn.classList.remove('active');
+    // Re-render if custom content exists
+    const saved = localStorage.getItem(OS_KEY);
+    if(saved) renderOsFromText(saved);
+  }
+}
+
+function saveOsEdits(){
+  const txt = document.getElementById('osEditArea').value;
+  localStorage.setItem(OS_KEY, txt);
+  renderOsFromText(txt);
+  osMode('view');
+  toast('Operating system updated ✅');
+}
+
+function renderOsFromText(txt){
+  const formatted = document.getElementById('osFormatted');
+  // Convert plain text back to styled HTML
+  const lines = txt.split('\n');
+  let html = '';
+  for(let i=0; i<lines.length; i++){
+    const line = lines[i].trim();
+    if(!line) { html += '<div style="height:12px"></div>'; continue; }
+
+    // Detect headers (all caps lines or lines with specific patterns)
+    if(line === line.toUpperCase() && line.length > 3 && !line.startsWith('$') && !/^\d/.test(line)){
+      // Section header
+      let dotClass = 'embark';
+      if(line.includes('MONDAY')) dotClass='embark';
+      else if(line.includes('TUESDAY')) dotClass='reso';
+      else if(line.includes('WEDNESDAY')) dotClass='discipline';
+      else if(line.includes('THURSDAY')) dotClass='magnum';
+      else if(line.includes('FRIDAY')) dotClass='pipeline';
+      else if(line.includes('NON-NEGOTIABLE') || line.includes('RULE')) dotClass='discipline';
+      else if(line.includes('DECISION')) dotClass='reso';
+      else if(line.includes('SCRIVEN') || line.includes('OPERATING')) dotClass='discipline';
+      html += `<div class="sec-head" style="margin-top:24px"><div class="sec-dot ${dotClass}"></div><div class="sec-label">${line}</div></div>`;
+    }
+    // Time blocks (contain | or time patterns)
+    else if(/^\d{1,2}:\d{2}/.test(line)){
+      const parts = line.split('|');
+      if(parts.length >= 2){
+        html += `<div class="os-block"><div class="os-time">${parts[0].trim()}</div><div class="os-desc">${parts.slice(1).join('|').trim()}</div></div>`;
+      } else {
+        html += `<div class="os-block"><div class="os-desc">${line}</div></div>`;
+      }
+    }
+    // Question lines (contain ?)
+    else if(line.endsWith('?')){
+      html += `<div class="os-decision-card"><div class="os-q">${line}</div>`;
+      // Look ahead for answer
+      if(i+1 < lines.length && lines[i+1].trim() && !lines[i+1].trim().endsWith('?')){
+        html += `<div class="os-a">${lines[i+1].trim()}</div>`;
+        i++;
+      }
+      html += `</div>`;
+    }
+    // Regular content
+    else {
+      html += `<div class="os-rule-card"><div class="os-desc">${line}</div></div>`;
+    }
+  }
+  formatted.innerHTML = html;
+}
+
+// Load saved OS on init
+function initOs(){
+  const saved = localStorage.getItem(OS_KEY);
+  if(saved) renderOsFromText(saved);
+}
+
 // Status
 function updateStatus(){
   const w=cw(), b=document.getElementById('statusBadge');
@@ -820,7 +1112,7 @@ function updateStatus(){
 
 // Init
 document.getElementById('weekLabel').textContent=wkLabel();
-loadMonday(); loadFriday(); renderBig3Review(); renderDash(); renderHistory(); updateStatus(); updateFridayBtn();
+loadMonday(); loadFriday(); renderBig3Review(); renderDash(); renderHistory(); updateStatus(); updateFridayBtn(); initOs();
 </script>
 </body>
 </html>
