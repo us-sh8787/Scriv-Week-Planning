@@ -29,424 +29,175 @@
   --radius: 14px;
   --radius-sm: 10px;
 }
-* { margin:0; padding:0; box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100dvh;
-  overflow-x: hidden;
-  padding-bottom: 120px;
-}
-body::before {
-  content:'';position:fixed;inset:0;
-  background: radial-gradient(ellipse 600px 400px at 50% 0%, rgba(61,255,194,0.03) 0%, transparent 70%);
-  pointer-events:none; z-index:0;
-}
-.app { position:relative; z-index:1; max-width:480px; margin:0 auto; }
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--text);min-height:100dvh;overflow-x:hidden;padding-bottom:120px}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 600px 400px at 50% 0%,rgba(61,255,194,0.03) 0%,transparent 70%);pointer-events:none;z-index:0}
+.app{position:relative;z-index:1;max-width:480px;margin:0 auto}
 
-/* HEADER */
-.header {
-  padding: 16px 20px 12px;
-  position: sticky; top:0; z-index:100;
-  background: linear-gradient(to bottom, var(--bg) 70%, transparent);
-  backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
-}
-.header-row { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
-.week-label {
-  font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--mint);
-  letter-spacing:2.5px; text-transform:uppercase; margin-bottom:2px;
-}
-.header-title { font-size:24px; font-weight:800; letter-spacing:-0.5px; }
-.badge {
-  font-family:'JetBrains Mono',monospace; font-size:9px; padding:4px 10px;
-  border-radius:20px; letter-spacing:1.5px; text-transform:uppercase; font-weight:600;
-}
-.badge-plan { background:rgba(91,141,247,0.12); color:var(--blue); border:1px solid rgba(91,141,247,0.25); }
-.badge-score { background:var(--mint-dim); color:var(--mint); border:1px solid var(--mint-glow); }
-.badge-done { background:rgba(166,107,247,0.12); color:var(--purple); border:1px solid rgba(166,107,247,0.25); }
+.header{padding:16px 20px 12px;position:sticky;top:0;z-index:100;background:linear-gradient(to bottom,var(--bg) 70%,transparent);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px)}
+.header-row{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.week-label{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mint);letter-spacing:2.5px;text-transform:uppercase;margin-bottom:2px}
+.header-title{font-size:24px;font-weight:800;letter-spacing:-0.5px}
+.badge{font-family:'JetBrains Mono',monospace;font-size:9px;padding:4px 10px;border-radius:20px;letter-spacing:1.5px;text-transform:uppercase;font-weight:600}
+.badge-plan{background:rgba(91,141,247,0.12);color:var(--blue);border:1px solid rgba(91,141,247,0.25)}
+.badge-score{background:var(--mint-dim);color:var(--mint);border:1px solid var(--mint-glow)}
+.badge-done{background:rgba(166,107,247,0.12);color:var(--purple);border:1px solid rgba(166,107,247,0.25)}
 
-/* TABS */
-.tabs {
-  display:flex; gap:3px; background:var(--surface); border-radius:var(--radius-sm);
-  padding:3px; border:1px solid var(--border);
-}
-.tab {
-  flex:1; padding:9px 0; text-align:center; font-size:11px; font-weight:700;
-  border-radius:8px; cursor:pointer; transition:all 0.2s; color:var(--text-dim);
-  border:none; background:none; font-family:'JetBrains Mono',monospace; letter-spacing:0.5px;
-}
-.tab.active { background:var(--mint); color:var(--bg); }
+.tabs{display:flex;gap:3px;background:var(--surface);border-radius:var(--radius-sm);padding:3px;border:1px solid var(--border)}
+.tab{flex:1;padding:9px 0;text-align:center;font-size:11px;font-weight:700;border-radius:8px;cursor:pointer;transition:all 0.2s;color:var(--text-dim);border:none;background:none;font-family:'JetBrains Mono',monospace;letter-spacing:0.5px}
+.tab.active{background:var(--mint);color:var(--bg)}
 
-/* VIEWS */
-.view { display:none; padding:20px; }
-.view.active { display:block; animation: fadeUp 0.25s ease-out; }
-@keyframes fadeUp { from{opacity:0;transform:translateY(8px)} to{opacity:1;transform:translateY(0)} }
+.view{display:none;padding:20px}
+.view.active{display:block;animation:fadeUp 0.25s ease-out}
+@keyframes fadeUp{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-/* SECTION HEADERS */
-.sec-head {
-  display:flex; align-items:center; gap:10px; margin-bottom:12px; margin-top:4px;
-}
-.sec-dot {
-  width:8px; height:8px; border-radius:3px; flex-shrink:0;
-}
-.sec-dot.embark { background:var(--blue); }
-.sec-dot.reso { background:var(--purple); }
-.sec-dot.magnum { background:var(--amber); }
-.sec-dot.discipline { background:var(--mint); }
-.sec-dot.pipeline { background:var(--red); }
-.sec-dot.big3 { background:var(--text-mid); }
-.sec-label {
-  font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2.5px;
-  text-transform:uppercase; color:var(--text-dim);
-}
-.section { margin-bottom:24px; }
+.sec-head{display:flex;align-items:center;gap:10px;margin-bottom:12px;margin-top:4px}
+.sec-dot{width:8px;height:8px;border-radius:3px;flex-shrink:0}
+.sec-dot.embark{background:var(--blue)}
+.sec-dot.reso{background:var(--purple)}
+.sec-dot.magnum{background:var(--amber)}
+.sec-dot.discipline{background:var(--mint)}
+.sec-dot.pipeline{background:var(--red)}
+.sec-dot.big3{background:var(--text-mid)}
+.sec-label{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2.5px;text-transform:uppercase;color:var(--text-dim);flex:1}
+.sec-edit-btn{width:28px;height:28px;border-radius:8px;border:1px solid transparent;background:none;color:var(--text-dim);font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.15s;flex-shrink:0}
+.sec-edit-btn:hover,.sec-edit-btn:active{border-color:var(--border);background:var(--surface)}
+.sec-edit-btn.editing{color:var(--mint);border-color:var(--mint-glow);background:var(--mint-dim)}
+.section{margin-bottom:24px}
 
-/* CARDS */
-.card {
-  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
-  padding:14px 16px; margin-bottom:6px;
-}
-.card-row { display:flex; align-items:center; justify-content:space-between; gap:12px; }
-.card-label { font-size:13px; font-weight:500; line-height:1.3; flex:1; }
-.card-target {
-  font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--text-dim);
-  margin-top:2px; letter-spacing:0.5px;
-}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:6px}
+.card-row{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.card-label{font-size:13px;font-weight:500;line-height:1.3;flex:1}
+.card-target{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-dim);margin-top:2px;letter-spacing:0.5px}
 
-/* INPUTS */
-.num-input {
-  width:60px; padding:7px 8px; background:var(--surface2); border:1px solid var(--border);
-  border-radius:8px; color:var(--text); font-family:'JetBrains Mono',monospace;
-  font-size:16px; font-weight:700; text-align:center; outline:none; transition:border 0.15s;
-}
-.num-input:focus { border-color:var(--mint); }
-.num-input.wide { width:100px; text-align:right; }
+/* Editable labels */
+.card-label-edit,.card-target-edit{display:none;width:100%;background:var(--surface2);border:1px solid var(--mint-glow);border-radius:6px;padding:5px 8px;color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;outline:none}
+.card-target-edit{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-dim);margin-top:4px;padding:3px 8px}
+.card.editing .card-label{display:none}
+.card.editing .card-target{display:none}
+.card.editing .card-label-edit{display:block}
+.card.editing .card-target-edit{display:block}
+.toggle-card.editing .card-label{display:none}
+.toggle-card.editing .card-target{display:none}
+.toggle-card.editing .card-label-edit{display:block}
+.toggle-card.editing .card-target-edit{display:block}
 
-/* TOGGLE */
-.toggle-card {
-  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
-  padding:14px 16px; margin-bottom:6px; display:flex; align-items:center;
-  justify-content:space-between; cursor:pointer; transition:all 0.15s; user-select:none;
-}
-.toggle-card.on {
-  border-color:var(--mint-glow);
-  background:linear-gradient(135deg, var(--surface) 0%, rgba(61,255,194,0.03) 100%);
-}
-.check-box {
-  width:22px; height:22px; border-radius:6px; border:2px solid var(--border);
-  display:flex; align-items:center; justify-content:center; transition:all 0.15s; flex-shrink:0;
-}
-.toggle-card.on .check-box { background:var(--mint); border-color:var(--mint); }
-.check-box svg { opacity:0; transition:opacity 0.1s; }
-.toggle-card.on .check-box svg { opacity:1; }
+.num-input{width:60px;padding:7px 8px;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:16px;font-weight:700;text-align:center;outline:none;transition:border 0.15s}
+.num-input:focus{border-color:var(--mint)}
+.num-input.wide{width:100px;text-align:right}
 
-/* COUNTER */
-.ctr { display:flex; align-items:center; gap:2px; }
-.ctr-btn {
-  width:30px; height:30px; border-radius:8px; border:1px solid var(--border);
-  background:var(--surface2); color:var(--text); font-size:16px; display:flex;
-  align-items:center; justify-content:center; cursor:pointer; transition:all 0.1s;
-}
-.ctr-btn:active { background:var(--mint); color:var(--bg); border-color:var(--mint); }
-.ctr-val {
-  width:36px; text-align:center; font-family:'JetBrains Mono',monospace;
-  font-size:18px; font-weight:700;
-}
+.toggle-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:6px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all 0.15s;user-select:none}
+.toggle-card.on{border-color:var(--mint-glow);background:linear-gradient(135deg,var(--surface) 0%,rgba(61,255,194,0.03) 100%)}
+.check-box{width:22px;height:22px;border-radius:6px;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;transition:all 0.15s;flex-shrink:0}
+.toggle-card.on .check-box{background:var(--mint);border-color:var(--mint)}
+.check-box svg{opacity:0;transition:opacity 0.1s}
+.toggle-card.on .check-box svg{opacity:1}
 
-/* BIG 3 */
-.big3-card {
-  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
-  padding:14px 16px; margin-bottom:8px; transition:border 0.15s;
-}
-.big3-card:focus-within { border-color:rgba(91,141,247,0.4); }
-.big3-num {
-  font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--blue);
-  letter-spacing:2px; margin-bottom:6px;
-}
-.big3-input {
-  width:100%; background:none; border:none; color:var(--text);
-  font-family:'DM Sans',sans-serif; font-size:15px; font-weight:500;
-  outline:none; resize:none; line-height:1.4;
-}
-.big3-input::placeholder { color:var(--text-dim); opacity:0.5; }
-.big3-cu {
-  display:flex; align-items:center; gap:8px; margin-top:10px;
-  padding-top:10px; border-top:1px solid var(--border);
-}
-.big3-cu label {
-  font-size:11px; color:var(--text-dim); font-family:'JetBrains Mono',monospace;
-}
+.ctr{display:flex;align-items:center;gap:2px}
+.ctr-btn{width:30px;height:30px;border-radius:8px;border:1px solid var(--border);background:var(--surface2);color:var(--text);font-size:16px;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all 0.1s}
+.ctr-btn:active{background:var(--mint);color:var(--bg);border-color:var(--mint)}
+.ctr-val{width:36px;text-align:center;font-family:'JetBrains Mono',monospace;font-size:18px;font-weight:700}
 
-/* BUTTONS */
-.btn-primary {
-  width:100%; padding:14px; border-radius:var(--radius); border:none;
-  font-family:'DM Sans',sans-serif; font-size:15px; font-weight:700;
-  cursor:pointer; transition:all 0.15s; letter-spacing:0.3px;
-}
-.btn-primary:active { transform:scale(0.98); }
-.btn-blue { background:var(--blue); color:#fff; }
-.btn-mint { background:var(--mint); color:var(--bg); }
-.btn-ghost {
-  background:var(--surface); border:1px solid var(--border); color:var(--text-mid);
-}
+.big3-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:8px;transition:border 0.15s}
+.big3-card:focus-within{border-color:rgba(91,141,247,0.4)}
+.big3-num{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--blue);letter-spacing:2px;margin-bottom:6px}
+.big3-input{width:100%;background:none;border:none;color:var(--text);font-family:'DM Sans',sans-serif;font-size:15px;font-weight:500;outline:none;resize:none;line-height:1.4}
+.big3-input::placeholder{color:var(--text-dim);opacity:0.5}
+.big3-cu{display:flex;align-items:center;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid var(--border)}
+.big3-cu label{font-size:11px;color:var(--text-dim);font-family:'JetBrains Mono',monospace}
 
-/* DASHBOARD */
-.dash-grade-row {
-  display:flex; gap:12px; margin-bottom:20px;
-}
-.dash-grade-box {
-  flex:1; background:var(--surface); border:1px solid var(--border);
-  border-radius:var(--radius); padding:16px; text-align:center;
-}
-.dash-grade-big {
-  font-family:'JetBrains Mono',monospace; font-size:42px; font-weight:800; line-height:1;
-}
-.dash-grade-sub {
-  font-size:11px; color:var(--text-dim); margin-top:6px;
-}
-.dash-stat-grid {
-  display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-bottom:16px;
-}
-.dash-stat {
-  background:var(--surface); border:1px solid var(--border);
-  border-radius:var(--radius-sm); padding:12px;
-}
-.dash-stat-val {
-  font-family:'JetBrains Mono',monospace; font-size:20px; font-weight:700;
-}
-.dash-stat-label { font-size:11px; color:var(--text-dim); margin-top:2px; }
+.btn-primary{width:100%;padding:14px;border-radius:var(--radius);border:none;font-family:'DM Sans',sans-serif;font-size:15px;font-weight:700;cursor:pointer;transition:all 0.15s;letter-spacing:0.3px}
+.btn-primary:active{transform:scale(0.98)}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-mint{background:var(--mint);color:var(--bg)}
+.btn-ghost{background:var(--surface);border:1px solid var(--border);color:var(--text-mid)}
 
-/* Trend bars */
-.trend-section { margin-bottom:20px; }
-.trend-title {
-  font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:2px;
-  color:var(--text-dim); text-transform:uppercase; margin-bottom:10px;
-}
-.trend-row {
-  display:flex; align-items:center; gap:10px; margin-bottom:6px;
-}
-.trend-week {
-  font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--text-dim);
-  width:50px; flex-shrink:0; text-align:right;
-}
-.trend-bar-bg {
-  flex:1; height:20px; background:var(--surface); border-radius:4px; overflow:hidden;
-}
-.trend-bar {
-  height:100%; border-radius:4px; transition:width 0.5s ease-out;
-  display:flex; align-items:center; justify-content:flex-end; padding-right:6px;
-  font-family:'JetBrains Mono',monospace; font-size:9px; font-weight:700;
-}
-.trend-grade {
-  font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:700;
-  width:28px; text-align:center; flex-shrink:0;
-}
+/* Dashboard */
+.dash-grade-row{display:flex;gap:12px;margin-bottom:20px}
+.dash-grade-box{flex:1;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;text-align:center}
+.dash-grade-big{font-family:'JetBrains Mono',monospace;font-size:42px;font-weight:800;line-height:1}
+.dash-grade-sub{font-size:11px;color:var(--text-dim);margin-top:6px}
+.dash-stat-grid{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-bottom:16px}
+.dash-stat{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-sm);padding:12px}
+.dash-stat-val{font-family:'JetBrains Mono',monospace;font-size:20px;font-weight:700}
+.dash-stat-label{font-size:11px;color:var(--text-dim);margin-top:2px}
+.trend-section{margin-bottom:20px}
+.trend-title{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;margin-bottom:10px}
+.trend-row{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.trend-week{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--text-dim);width:50px;flex-shrink:0;text-align:right}
+.trend-bar-bg{flex:1;height:20px;background:var(--surface);border-radius:4px;overflow:hidden}
+.trend-bar{height:100%;border-radius:4px;transition:width 0.5s ease-out;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;font-family:'JetBrains Mono',monospace;font-size:9px;font-weight:700}
+.trend-grade{font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;width:28px;text-align:center;flex-shrink:0}
 
-/* SCREENSHOT REPORT */
-.report-overlay {
-  display:none; position:fixed; inset:0; z-index:500;
-  background:var(--bg); overflow-y:auto; padding:0;
-}
-.report-overlay.open { display:block; }
-.report-inner {
-  max-width:400px; margin:0 auto; padding:24px 20px 40px;
-}
-.report-close {
-  position:fixed; top:12px; right:16px; z-index:501;
-  width:36px; height:36px; border-radius:50%; background:var(--surface2);
-  border:1px solid var(--border); color:var(--text); font-size:18px;
-  display:flex; align-items:center; justify-content:center; cursor:pointer;
-}
-.rpt-header { text-align:center; margin-bottom:24px; padding-top:8px; }
-.rpt-name {
-  font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:3px;
-  color:var(--mint); text-transform:uppercase; margin-bottom:4px;
-}
-.rpt-week { font-size:18px; font-weight:700; margin-bottom:4px; }
-.rpt-date { font-size:11px; color:var(--text-dim); }
-.rpt-grade {
-  font-family:'JetBrains Mono',monospace; font-size:64px; font-weight:800;
-  text-align:center; line-height:1; margin:16px 0 4px;
-}
-.rpt-pct { text-align:center; font-size:12px; color:var(--text-dim); margin-bottom:24px; }
-.rpt-section { margin-bottom:16px; }
-.rpt-sec-title {
-  font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px;
-  color:var(--text-dim); text-transform:uppercase; margin-bottom:8px;
-  padding-bottom:6px; border-bottom:1px solid var(--border);
-}
-.rpt-row {
-  display:flex; justify-content:space-between; align-items:baseline;
-  padding:3px 0; font-size:12px;
-}
-.rpt-row-label { color:var(--text-mid); }
-.rpt-row-val { font-family:'JetBrains Mono',monospace; font-weight:600; font-size:12px; }
-.rpt-footer {
-  text-align:center; margin-top:24px; padding-top:16px; border-top:1px solid var(--border);
-}
-.rpt-footer-text {
-  font-family:'JetBrains Mono',monospace; font-size:9px; letter-spacing:2px;
-  color:var(--text-dim); text-transform:uppercase;
-}
-.rpt-pipe-row {
-  display:flex; justify-content:space-between; padding:4px 0;
-}
-.rpt-pipe-label { font-size:12px; color:var(--text-mid); }
-.rpt-pipe-val {
-  font-family:'JetBrains Mono',monospace; font-size:14px; font-weight:700; color:var(--mint);
-}
+/* Report overlay */
+.report-overlay{display:none;position:fixed;inset:0;z-index:500;background:var(--bg);overflow-y:auto;padding:0}
+.report-overlay.open{display:block}
+.report-inner{max-width:400px;margin:0 auto;padding:24px 20px 40px}
+.report-close{position:fixed;top:12px;right:16px;z-index:501;width:36px;height:36px;border-radius:50%;background:var(--surface2);border:1px solid var(--border);color:var(--text);font-size:18px;display:flex;align-items:center;justify-content:center;cursor:pointer}
+.rpt-header{text-align:center;margin-bottom:24px;padding-top:8px}
+.rpt-name{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--mint);text-transform:uppercase;margin-bottom:4px}
+.rpt-week{font-size:18px;font-weight:700;margin-bottom:4px}
+.rpt-date{font-size:11px;color:var(--text-dim)}
+.rpt-grade{font-family:'JetBrains Mono',monospace;font-size:64px;font-weight:800;text-align:center;line-height:1;margin:16px 0 4px}
+.rpt-pct{text-align:center;font-size:12px;color:var(--text-dim);margin-bottom:24px}
+.rpt-section{margin-bottom:16px}
+.rpt-sec-title{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim);text-transform:uppercase;margin-bottom:8px;padding-bottom:6px;border-bottom:1px solid var(--border)}
+.rpt-row{display:flex;justify-content:space-between;align-items:baseline;padding:3px 0;font-size:12px}
+.rpt-row-label{color:var(--text-mid)}
+.rpt-row-val{font-family:'JetBrains Mono',monospace;font-weight:600;font-size:12px}
+.rpt-pipe-row{display:flex;justify-content:space-between;padding:4px 0}
+.rpt-pipe-label{font-size:12px;color:var(--text-mid)}
+.rpt-pipe-val{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700;color:var(--mint)}
 
-/* HISTORY */
-.hist-item {
-  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
-  padding:14px 16px; margin-bottom:6px; display:flex; justify-content:space-between;
-  align-items:center; cursor:pointer; transition:all 0.1s;
-}
-.hist-item:active { background:var(--surface2); }
-.hist-week { font-size:14px; font-weight:600; }
-.hist-date { font-size:10px; color:var(--text-dim); margin-top:2px; }
-.hist-grade { font-family:'JetBrains Mono',monospace; font-size:22px; font-weight:800; }
-.hist-actions { display:flex; gap:6px; margin-top:6px; }
-.hist-btn {
-  font-family:'JetBrains Mono',monospace; font-size:9px; padding:4px 8px;
-  border-radius:6px; border:1px solid var(--border); background:var(--surface2);
-  color:var(--text-dim); cursor:pointer; letter-spacing:0.5px;
-}
-.hist-btn:active { background:var(--surface3); }
+/* History */
+.hist-item{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:6px;display:flex;justify-content:space-between;align-items:center;cursor:pointer;transition:all 0.1s}
+.hist-item:active{background:var(--surface2)}
+.hist-week{font-size:14px;font-weight:600}
+.hist-date{font-size:10px;color:var(--text-dim);margin-top:2px}
+.hist-grade{font-family:'JetBrains Mono',monospace;font-size:22px;font-weight:800}
+.hist-actions{display:flex;gap:6px;margin-top:6px}
+.hist-btn{font-family:'JetBrains Mono',monospace;font-size:9px;padding:4px 8px;border-radius:6px;border:1px solid var(--border);background:var(--surface2);color:var(--text-dim);cursor:pointer;letter-spacing:0.5px}
 
-.empty-state { text-align:center; padding:60px 20px; color:var(--text-dim); }
-.empty-icon { font-size:36px; margin-bottom:10px; }
-.empty-state p { font-size:13px; line-height:1.5; }
+.empty-state{text-align:center;padding:60px 20px;color:var(--text-dim)}
+.empty-icon{font-size:36px;margin-bottom:10px}
+.empty-state p{font-size:13px;line-height:1.5}
 
-/* Toast */
-.toast {
-  position:fixed; bottom:30px; left:50%; transform:translateX(-50%) translateY(80px);
-  background:var(--mint); color:var(--bg); padding:10px 22px; border-radius:24px;
-  font-size:13px; font-weight:600; z-index:600; transition:transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
-  pointer-events:none; white-space:nowrap;
-}
-.toast.show { transform:translateX(-50%) translateY(0); }
+.toast{position:fixed;bottom:30px;left:50%;transform:translateX(-50%) translateY(80px);background:var(--mint);color:var(--bg);padding:10px 22px;border-radius:24px;font-size:13px;font-weight:600;z-index:600;transition:transform 0.3s cubic-bezier(0.175,0.885,0.32,1.275);pointer-events:none;white-space:nowrap}
+.toast.show{transform:translateX(-50%) translateY(0)}
 
-/* IDENTITY BLOCK */
-.identity-block {
-  margin-bottom:24px; padding:20px; background:var(--surface);
-  border:1px solid var(--border); border-radius:var(--radius);
-  text-align:center; position:relative; overflow:hidden;
-}
-.identity-block::before {
-  content:''; position:absolute; inset:0;
-  background: radial-gradient(ellipse 300px 200px at 50% 120%, rgba(61,255,194,0.04) 0%, transparent 70%);
-  pointer-events:none;
-}
-.theme-row {
-  display:flex; align-items:baseline; justify-content:center; gap:10px; margin-bottom:16px;
-}
-.theme-year {
-  font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--text-dim);
-  letter-spacing:2px; font-weight:500;
-}
-.theme-word {
-  font-family:'JetBrains Mono',monospace; font-size:28px; font-weight:800;
-  letter-spacing:6px; color:var(--mint);
-}
-.values-row {
-  display:flex; justify-content:center; gap:6px; margin-bottom:16px; flex-wrap:wrap;
-}
-.value-chip {
-  font-family:'JetBrains Mono',monospace; font-size:10px; font-weight:600;
-  letter-spacing:2px; padding:5px 12px; border-radius:20px;
-  border:1px solid var(--border); color:var(--text-mid);
-  background:var(--surface2);
-}
-.enjoy-line {
-  font-size:12px; color:var(--text-dim); font-style:italic;
-  line-height:1.4; max-width:280px; margin:0 auto;
-}
+.edit-banner{display:none;background:rgba(247,166,59,0.1);border:1px solid rgba(247,166,59,0.3);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:16px;font-size:12px;color:var(--amber);text-align:center;font-family:'JetBrains Mono',monospace;letter-spacing:0.5px}
+.edit-banner.show{display:block}
 
-/* OS View */
-.os-section { margin-bottom:24px; }
-.os-day-header {
-  display:flex; align-items:center; gap:10px; margin-bottom:10px;
-}
-.os-day-dot {
-  width:10px; height:10px; border-radius:4px; flex-shrink:0;
-}
-.os-day-dot.mon { background:var(--blue); }
-.os-day-dot.tue { background:var(--purple); }
-.os-day-dot.wed { background:var(--mint); }
-.os-day-dot.thu { background:var(--amber); }
-.os-day-dot.fri { background:var(--red); }
-.os-day-name {
-  font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700;
-  letter-spacing:2px; text-transform:uppercase; color:var(--text);
-}
-.os-day-sub {
-  font-family:'JetBrains Mono',monospace; font-size:9px; color:var(--text-dim);
-  letter-spacing:1px; margin-left:auto;
-}
-.os-block {
-  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
-  padding:12px 14px; margin-bottom:4px;
-}
-.os-time {
-  font-family:'JetBrains Mono',monospace; font-size:10px; color:var(--mint);
-  letter-spacing:0.5px; margin-bottom:4px;
-}
-.os-desc {
-  font-size:13px; color:var(--text-mid); line-height:1.45;
-}
-.os-rule-card {
-  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
-  padding:14px 16px; margin-bottom:6px;
-}
-.os-rule-card .os-desc { color:var(--text); font-weight:500; font-size:13px; }
-.os-decision-card {
-  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
-  padding:14px 16px; margin-bottom:6px;
-}
-.os-q {
-  font-size:13px; font-weight:600; color:var(--text); margin-bottom:6px;
-}
-.os-a {
-  font-size:12px; color:var(--text-mid); line-height:1.45;
-}
-.os-edit-area {
-  display:none; width:100%; min-height:300px; padding:16px;
-  background:var(--surface); border:1px solid var(--border); border-radius:var(--radius);
-  color:var(--text); font-family:'DM Sans',sans-serif; font-size:13px;
-  line-height:1.6; outline:none; resize:vertical;
-}
-.os-edit-area.show { display:block; }
-.os-formatted.hide { display:none; }
-.os-edit-toggle {
-  display:flex; gap:8px; margin-bottom:20px;
-}
-.os-edit-btn {
-  flex:1; padding:10px; border-radius:var(--radius-sm); border:1px solid var(--border);
-  background:var(--surface); color:var(--text-mid); font-family:'JetBrains Mono',monospace;
-  font-size:10px; letter-spacing:1px; cursor:pointer; text-align:center; transition:all 0.15s;
-}
-.os-edit-btn.active { background:var(--mint); color:var(--bg); border-color:var(--mint); }
-
-/* Edit mode indicator */
-.edit-banner {
-  display:none; background:rgba(247,166,59,0.1); border:1px solid rgba(247,166,59,0.3);
-  border-radius:var(--radius-sm); padding:10px 14px; margin-bottom:16px;
-  font-size:12px; color:var(--amber); text-align:center;
-  font-family:'JetBrains Mono',monospace; letter-spacing:0.5px;
-}
-.edit-banner.show { display:block; }
+/* OS */
+.os-section{margin-bottom:24px}
+.os-day-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.os-day-dot{width:10px;height:10px;border-radius:4px;flex-shrink:0}
+.os-day-dot.mon{background:var(--blue)}.os-day-dot.tue{background:var(--purple)}.os-day-dot.wed{background:var(--mint)}.os-day-dot.thu{background:var(--amber)}.os-day-dot.fri{background:var(--red)}
+.os-day-name{font-family:'JetBrains Mono',monospace;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--text)}
+.os-day-sub{font-family:'JetBrains Mono',monospace;font-size:9px;color:var(--text-dim);letter-spacing:1px;margin-left:auto}
+.os-block{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;margin-bottom:4px}
+.os-time{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--mint);letter-spacing:0.5px;margin-bottom:4px}
+.os-desc{font-size:13px;color:var(--text-mid);line-height:1.45}
+.os-rule-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:6px}
+.os-rule-card .os-desc{color:var(--text);font-weight:500;font-size:13px}
+.os-decision-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:14px 16px;margin-bottom:6px}
+.os-q{font-size:13px;font-weight:600;color:var(--text);margin-bottom:6px}
+.os-a{font-size:12px;color:var(--text-mid);line-height:1.45}
+.os-edit-area{display:none;width:100%;min-height:300px;padding:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);color:var(--text);font-family:'DM Sans',sans-serif;font-size:13px;line-height:1.6;outline:none;resize:vertical}
+.os-edit-area.show{display:block}
+.os-formatted.hide{display:none}
+.os-edit-toggle{display:flex;gap:8px;margin-bottom:20px}
+.os-edit-btn{flex:1;padding:10px;border-radius:var(--radius-sm);border:1px solid var(--border);background:var(--surface);color:var(--text-mid);font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:1px;cursor:pointer;text-align:center;transition:all 0.15s}
+.os-edit-btn.active{background:var(--mint);color:var(--bg);border-color:var(--mint)}
 </style>
 </head>
 <body>
-
 <div class="app">
   <div class="header">
     <div class="header-row">
       <div>
-        <div class="week-label" id="weekLabel">WEEK OF FEB 17</div>
+        <div class="week-label" id="weekLabel"></div>
         <div class="header-title">Weekly Scorecard</div>
       </div>
       <div class="badge badge-plan" id="statusBadge">PLAN</div>
@@ -460,146 +211,49 @@ body::before {
     </div>
   </div>
 
-  <!-- ===== MONDAY ===== -->
+  <!-- MONDAY -->
   <div class="view active" id="viewMonday">
-    <p style="font-size:13px;color:var(--text-dim);margin-bottom:20px;line-height:1.5;">
-      Three non-negotiable outcomes that define a winning week. Lock them in, add to ClickUp, execute.
-    </p>
-    <div class="big3-card">
-      <div class="big3-num">01</div>
-      <textarea class="big3-input" id="big3_1" rows="2" placeholder="Highest-leverage priority"></textarea>
-      <div class="big3-cu"><input type="checkbox" id="cu1"><label for="cu1">In ClickUp</label></div>
-    </div>
-    <div class="big3-card">
-      <div class="big3-num">02</div>
-      <textarea class="big3-input" id="big3_2" rows="2" placeholder="Second priority"></textarea>
-      <div class="big3-cu"><input type="checkbox" id="cu2"><label for="cu2">In ClickUp</label></div>
-    </div>
-    <div class="big3-card">
-      <div class="big3-num">03</div>
-      <textarea class="big3-input" id="big3_3" rows="2" placeholder="Third priority"></textarea>
-      <div class="big3-cu"><input type="checkbox" id="cu3"><label for="cu3">In ClickUp</label></div>
-    </div>
-    <div style="margin-top:18px;">
-      <button class="btn-primary btn-blue" onclick="saveMondayPlan()">Lock In Big 3</button>
-    </div>
+    <p style="font-size:13px;color:var(--text-dim);margin-bottom:20px;line-height:1.5;">Three non-negotiable outcomes that define a winning week. Lock them in, add to ClickUp, execute.</p>
+    <div class="big3-card"><div class="big3-num">01</div><textarea class="big3-input" id="big3_1" rows="2" placeholder="Highest-leverage priority"></textarea><div class="big3-cu"><input type="checkbox" id="cu1"><label for="cu1">In ClickUp</label></div></div>
+    <div class="big3-card"><div class="big3-num">02</div><textarea class="big3-input" id="big3_2" rows="2" placeholder="Second priority"></textarea><div class="big3-cu"><input type="checkbox" id="cu2"><label for="cu2">In ClickUp</label></div></div>
+    <div class="big3-card"><div class="big3-num">03</div><textarea class="big3-input" id="big3_3" rows="2" placeholder="Third priority"></textarea><div class="big3-cu"><input type="checkbox" id="cu3"><label for="cu3">In ClickUp</label></div></div>
+    <div style="margin-top:18px"><button class="btn-primary btn-blue" onclick="saveMondayPlan()">Lock In Big 3</button></div>
   </div>
 
-  <!-- ===== FRIDAY ===== -->
+  <!-- FRIDAY -->
   <div class="view" id="viewFriday">
     <div class="edit-banner" id="editBanner">EDITING — changes auto-save. Tap "Update Report" when done.</div>
-
     <!-- Big 3 Review -->
-    <div class="section">
-      <div class="sec-head"><div class="sec-dot big3"></div><div class="sec-label">Big 3 Review</div></div>
-      <div id="big3Review"><div class="empty-state" style="padding:16px;"><p style="font-size:11px;">Set Big 3 on Monday first</p></div></div>
-    </div>
-
-    <!-- Embark -->
-    <div class="section">
-      <div class="sec-head"><div class="sec-dot embark"></div><div class="sec-label">Embark Pre-Launch</div></div>
-      <div class="card"><div class="card-row"><div><div class="card-label">Providers added to target list</div><div class="card-target">TARGET: 20 (50 W/ VA)</div></div><input class="num-input" type="number" id="f_embark_added" inputmode="numeric" placeholder="0"></div></div>
-      <div class="card"><div class="card-row"><div><div class="card-label">Providers personally researched</div><div class="card-target">TARGET: 10</div></div><input class="num-input" type="number" id="f_embark_research" inputmode="numeric" placeholder="0"></div></div>
-      <div class="card"><div class="card-row"><div><div class="card-label">Warm intro conversations</div><div class="card-target">TARGET: 3</div></div><input class="num-input" type="number" id="f_embark_convos" inputmode="numeric" placeholder="0"></div></div>
-      <div class="card"><div class="card-row"><div><div class="card-label">Total target list size</div><div class="card-target">CUMULATIVE</div></div><input class="num-input" type="number" id="f_embark_total" inputmode="numeric" placeholder="0"></div></div>
-    </div>
-
-    <!-- Reso -->
-    <div class="section">
-      <div class="sec-head"><div class="sec-dot reso"></div><div class="sec-label">Reso</div></div>
-      <div class="card"><div class="card-row"><div><div class="card-label">Proposals sent</div><div class="card-target">TARGET: 2</div></div><input class="num-input" type="number" id="f_reso_proposals" inputmode="numeric" placeholder="0"></div></div>
-      <div class="card"><div class="card-row"><div><div class="card-label">Deals closed this month</div><div class="card-target">TARGET: 2-3</div></div><input class="num-input" type="number" id="f_reso_deals" inputmode="numeric" placeholder="0"></div></div>
-      <div class="card"><div class="card-row"><div><div class="card-label">Pipeline value (annual rev)</div><div class="card-target">ACTIVE PROPOSALS</div></div><div style="display:flex;align-items:center;gap:4px"><span style="color:var(--text-dim);font-size:13px">$</span><input class="num-input wide" type="number" id="f_reso_pipeline" inputmode="numeric" placeholder="0"></div></div></div>
-    </div>
-
-    <!-- Magnum -->
-    <div class="section">
-      <div class="sec-head"><div class="sec-dot magnum"></div><div class="sec-label">Magnum / Summit</div></div>
-      <div class="card"><div class="card-row"><div><div class="card-label">Providers contacted</div><div class="card-target">TARGET: 10 (20 W/ VA)</div></div><input class="num-input" type="number" id="f_mag_contacted" inputmode="numeric" placeholder="0"></div></div>
-      <div class="card"><div class="card-row"><div><div class="card-label">Providers set up in portal</div><div class="card-target">CUMULATIVE</div></div><input class="num-input" type="number" id="f_mag_portal" inputmode="numeric" placeholder="0"></div></div>
-      <div class="card"><div class="card-row"><div><div class="card-label">Orders placed this week</div><div class="card-target">WEEKLY</div></div><input class="num-input" type="number" id="f_mag_orders" inputmode="numeric" placeholder="0"></div></div>
-    </div>
-
-    <!-- Discipline -->
-    <div class="section">
-      <div class="sec-head"><div class="sec-dot discipline"></div><div class="sec-label">Discipline</div></div>
-      <div class="toggle-card" onclick="tog(this)" id="f_dw_mon">
-        <div><div class="card-label">Deep work Mon 8–11am</div><div class="card-target">PROTECTED BLOCK</div></div>
-        <div class="check-box"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#08080c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      </div>
-      <div class="toggle-card" onclick="tog(this)" id="f_dw_thu">
-        <div><div class="card-label">Deep work Thu 8–11am</div><div class="card-target">PROTECTED BLOCK</div></div>
-        <div class="check-box"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#08080c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-      </div>
-      <div class="card"><div class="card-row"><div><div class="card-label">5:30am gym days</div><div class="card-target">TARGET: 4</div></div>
-        <div class="ctr"><button class="ctr-btn" onclick="adj('f_gym',-1)">−</button><div class="ctr-val" id="f_gym">0</div><button class="ctr-btn" onclick="adj('f_gym',1)">+</button></div>
-      </div></div>
-      <div class="card"><div class="card-row"><div><div class="card-label">LHR hours this week</div><div class="card-target">TARGET: UNDER 5</div></div><input class="num-input" type="number" id="f_lhr" inputmode="decimal" placeholder="0" step="0.5"></div></div>
-    </div>
-
-    <!-- Pipeline -->
-    <div class="section">
-      <div class="sec-head"><div class="sec-dot pipeline"></div><div class="sec-label">Pipeline Snapshot</div></div>
-      <div class="card"><div class="card-row"><div><div class="card-label">Embark — est. monthly billing</div><div class="card-target">IF PIPELINE CLOSES</div></div><div style="display:flex;align-items:center;gap:4px"><span style="color:var(--text-dim);font-size:13px">$</span><input class="num-input wide" type="number" id="f_pipe_embark" inputmode="numeric" placeholder="0"></div></div></div>
-      <div class="card"><div class="card-row"><div><div class="card-label">Reso — est. annual revenue</div><div class="card-target">IF PIPELINE CLOSES</div></div><div style="display:flex;align-items:center;gap:4px"><span style="color:var(--text-dim);font-size:13px">$</span><input class="num-input wide" type="number" id="f_pipe_reso" inputmode="numeric" placeholder="0"></div></div></div>
-    </div>
-
-    <div style="margin-top:8px;">
-      <button class="btn-primary btn-mint" id="fridaySubmitBtn" onclick="submitFriday()">Submit Friday Report</button>
-    </div>
+    <div class="section"><div class="sec-head"><div class="sec-dot big3"></div><div class="sec-label">Big 3 Review</div></div><div id="big3Review"></div></div>
+    <!-- Sections rendered by JS -->
+    <div id="fridaySections"></div>
+    <div style="margin-top:8px"><button class="btn-primary btn-mint" id="fridaySubmitBtn" onclick="submitFriday()">Submit Friday Report</button></div>
   </div>
 
-  <!-- ===== DASHBOARD ===== -->
+  <!-- DASHBOARD -->
   <div class="view" id="viewDash">
-    <!-- Identity — always visible -->
-    <div class="identity-block">
-      <div class="theme-row">
-        <div class="theme-year">2026</div>
-        <div class="theme-word">PROCESS</div>
-      </div>
-      <div class="values-row">
-        <div class="value-chip">GRIT</div>
-        <div class="value-chip">JOY</div>
-        <div class="value-chip">IMPACT</div>
-        <div class="value-chip">INTEGRITY</div>
-      </div>
-      <div class="enjoy-line">the scoreboard matters — but don't forget to enjoy the game</div>
-    </div>
-    <div id="dashContent">
-      <div class="empty-state"><div class="empty-icon">📊</div><p>Submit your first Friday report to see your dashboard.</p></div>
-    </div>
+    <div id="dashContent"><div class="empty-state"><div class="empty-icon">📊</div><p>Submit your first Friday report to see your dashboard.</p></div></div>
   </div>
 
-  <!-- ===== HISTORY ===== -->
+  <!-- HISTORY -->
   <div class="view" id="viewHistory">
-    <div id="histContent">
-      <div class="empty-state"><div class="empty-icon">📚</div><p>Weekly reports appear here. Build the streak.</p></div>
-    </div>
+    <div id="histContent"><div class="empty-state"><div class="empty-icon">📚</div><p>Weekly reports appear here. Build the streak.</p></div></div>
   </div>
-  <!-- ===== OS — OPERATING SYSTEM ===== -->
+
+  <!-- OS -->
   <div class="view" id="viewOs">
     <div class="os-edit-toggle">
       <button class="os-edit-btn active" id="osViewBtn" onclick="osMode('view')">VIEW</button>
       <button class="os-edit-btn" id="osEditBtn" onclick="osMode('edit')">EDIT</button>
     </div>
-
     <div id="osFormatted" class="os-formatted">
-      <!-- THE IDEAL WEEK -->
-      <div style="text-align:center;margin-bottom:24px;">
-        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--mint);margin-bottom:4px;">SCRIVEN HOEFS</div>
-        <div style="font-size:22px;font-weight:800;letter-spacing:-0.5px;">Operating System</div>
-        <div style="font-size:11px;color:var(--text-dim);margin-top:4px;">Weekly Structure, Metrics & Accountability</div>
+      <div style="text-align:center;margin-bottom:24px">
+        <div style="font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:3px;color:var(--mint);margin-bottom:4px">SCRIVEN HOEFS</div>
+        <div style="font-size:22px;font-weight:800;letter-spacing:-0.5px">Operating System</div>
+        <div style="font-size:11px;color:var(--text-dim);margin-top:4px">Weekly Structure, Metrics & Accountability</div>
       </div>
-
       <div class="sec-head"><div class="sec-dot embark"></div><div class="sec-label">1. The Ideal Week</div></div>
-
-      <!-- MONDAY -->
-      <div class="os-section">
-        <div class="os-day-header">
-          <div class="os-day-dot mon"></div>
-          <div class="os-day-name">Monday</div>
-          <div class="os-day-sub">Plan + Build</div>
-        </div>
+      <div class="os-section"><div class="os-day-header"><div class="os-day-dot mon"></div><div class="os-day-name">Monday</div><div class="os-day-sub">Plan + Build</div></div>
         <div class="os-block"><div class="os-time">8:00–8:30</div><div class="os-desc">Weekly planning. Review scorecard from last Friday. Set 3–5 priorities. No email.</div></div>
         <div class="os-block"><div class="os-time">8:30–11:00</div><div class="os-desc">DEEP WORK BLOCK. Embark list building (now through May), Reso sales system architecture, or Magnum outreach prep. Pick ONE per Monday. Do not split it.</div></div>
         <div class="os-block"><div class="os-time">11:00–12:00</div><div class="os-desc">Flex. Respond to anything urgent from the morning.</div></div>
@@ -607,60 +261,29 @@ body::before {
         <div class="os-block"><div class="os-time">1:00–3:00</div><div class="os-desc">Reso or Embark working sessions. Proposals, strategy docs, CRM setup, VA management. Thinking work, not calls.</div></div>
         <div class="os-block"><div class="os-time">3:00–4:30</div><div class="os-desc">Admin overflow, Slack, quick responses.</div></div>
       </div>
-
-      <!-- TUESDAY -->
-      <div class="os-section">
-        <div class="os-day-header">
-          <div class="os-day-dot tue"></div>
-          <div class="os-day-name">Tuesday</div>
-          <div class="os-day-sub">Call Day</div>
-        </div>
+      <div class="os-section"><div class="os-day-header"><div class="os-day-dot tue"></div><div class="os-day-name">Tuesday</div><div class="os-day-sub">Call Day</div></div>
         <div class="os-block"><div class="os-time">8:00–8:30</div><div class="os-desc">Prep for calls. Review who you're talking to and what you want from each conversation.</div></div>
         <div class="os-block"><div class="os-time">8:30–12:00</div><div class="os-desc">Standing calls: Reso leadership, LHR leadership, Roar. Plus prospect/networking calls.</div></div>
         <div class="os-block"><div class="os-time">12:00–1:00</div><div class="os-desc">Lunch.</div></div>
         <div class="os-block"><div class="os-time">1:00–4:30</div><div class="os-desc">Discovery calls, follow-ups, warm intro asks, closing conversations. This is your high-I day. Go be Scriven.</div></div>
       </div>
-
-      <!-- WEDNESDAY -->
-      <div class="os-section">
-        <div class="os-day-header">
-          <div class="os-day-dot wed"></div>
-          <div class="os-day-name">Wednesday</div>
-          <div class="os-day-sub">Personal + W2</div>
-        </div>
+      <div class="os-section"><div class="os-day-header"><div class="os-day-dot wed"></div><div class="os-day-name">Wednesday</div><div class="os-day-sub">Personal + W2</div></div>
         <div class="os-block"><div class="os-desc">Doctor appointments, 3M obligations, recovery, massage. Protect this day. If nothing is scheduled, use it as a bonus deep work day but don't make that the expectation. You need the reset.</div></div>
       </div>
-
-      <!-- THURSDAY -->
-      <div class="os-section">
-        <div class="os-day-header">
-          <div class="os-day-dot thu"></div>
-          <div class="os-day-name">Thursday</div>
-          <div class="os-day-sub">Build + Overflow</div>
-        </div>
+      <div class="os-section"><div class="os-day-header"><div class="os-day-dot thu"></div><div class="os-day-name">Thursday</div><div class="os-day-sub">Build + Overflow</div></div>
         <div class="os-block"><div class="os-time">8:00–11:00</div><div class="os-desc">DEEP WORK BLOCK #2. Same rules as Monday. Phone off, no Slack.</div></div>
         <div class="os-block"><div class="os-time">11:00–12:00</div><div class="os-desc">Flex.</div></div>
         <div class="os-block"><div class="os-time">12:00–1:00</div><div class="os-desc">Lunch.</div></div>
         <div class="os-block"><div class="os-time">1:00–3:00</div><div class="os-desc">Call overflow. Networking calls that couldn't fit Tuesday go here.</div></div>
         <div class="os-block"><div class="os-time">3:00–4:30</div><div class="os-desc">VA check-in, pipeline review, prep for next week's closes.</div></div>
       </div>
-
-      <!-- FRIDAY -->
-      <div class="os-section">
-        <div class="os-day-header">
-          <div class="os-day-dot fri"></div>
-          <div class="os-day-name">Friday</div>
-          <div class="os-day-sub">Close the Loop</div>
-        </div>
+      <div class="os-section"><div class="os-day-header"><div class="os-day-dot fri"></div><div class="os-day-name">Friday</div><div class="os-day-sub">Close the Loop</div></div>
         <div class="os-block"><div class="os-time">8:00–10:00</div><div class="os-desc">Admin. Emails, asset management, RV park, personal property. Get it done and contained.</div></div>
         <div class="os-block"><div class="os-time">10:00–11:00</div><div class="os-desc">Fill in weekly scorecard. Honest numbers only.</div></div>
         <div class="os-block"><div class="os-time">11:00–12:00</div><div class="os-desc">One strategic task you didn't finish, OR take the half day.</div></div>
-        <div class="os-block"><div class="os-desc" style="color:var(--mint);font-weight:600;">Afternoon: Off if possible. You earn this by executing Monday–Thursday.</div></div>
+        <div class="os-block"><div class="os-desc" style="color:var(--mint);font-weight:600">Afternoon: Off if possible. You earn this by executing Monday–Thursday.</div></div>
       </div>
-
-      <!-- NON-NEGOTIABLE RULES -->
-      <div style="margin-top:32px;">
-        <div class="sec-head"><div class="sec-dot discipline"></div><div class="sec-label">Non-Negotiable Rules</div></div>
+      <div style="margin-top:32px"><div class="sec-head"><div class="sec-dot discipline"></div><div class="sec-label">Non-Negotiable Rules</div></div>
         <div class="os-rule-card"><div class="os-desc">Monday and Thursday 8–11am are sacred. No calls. No Slack. No exceptions.</div></div>
         <div class="os-rule-card"><div class="os-desc">Networking calls go on Tuesday or Thursday 1–3pm. If both are full, the call waits until next week.</div></div>
         <div class="os-rule-card"><div class="os-desc">Every call request gets filtered: does this person have providers, hotel/STR owners, or knowledge I can't Google? If no, decline or cap at 15 minutes.</div></div>
@@ -668,85 +291,118 @@ body::before {
         <div class="os-rule-card"><div class="os-desc">LHR stays under 5 hours per week. Period.</div></div>
         <div class="os-rule-card"><div class="os-desc">Friday admin stays in the 8–10am box. It does not expand.</div></div>
       </div>
-
-      <!-- DECISION RULES -->
-      <div style="margin-top:32px;">
-        <div class="sec-head"><div class="sec-dot reso"></div><div class="sec-label">Decision Rules</div></div>
-        <div style="font-size:12px;color:var(--text-dim);margin-bottom:12px;">Reference these when you're tempted to deviate.</div>
-
-        <div class="os-decision-card">
-          <div class="os-q">Should I take this call/meeting?</div>
-          <div class="os-a">Does this person have providers in their network, hotel/STR owners in their network, or knowledge I can't Google? If no → decline or 15 min max.</div>
-        </div>
-        <div class="os-decision-card">
-          <div class="os-q">Should I get involved in this Reso ops issue?</div>
-          <div class="os-a">Can my team solve it without me in the next 48 hours? If yes → don't touch it. If no → spend max 2 hours, then hand it back.</div>
-        </div>
-        <div class="os-decision-card">
-          <div class="os-q">Should I spend time on this LHR thing?</div>
-          <div class="os-a">Is it an acquisition or a project worth $50k+ in value? If no → delegate. If yes → bring it to your weekly planning block.</div>
-        </div>
-        <div class="os-decision-card">
-          <div class="os-q">Should I pursue this new opportunity?</div>
-          <div class="os-a">Does it directly feed Embark revenue, Reso revenue, or net worth growth? If no → say no. You are not allowed to add a 6th plate.</div>
-        </div>
-        <div class="os-decision-card">
-          <div class="os-q">Magnum: Stay or Kill?</div>
-          <div class="os-a">60-day clock starts when the portal is live. 10 active ordering providers by deadline or it's done. No negotiating with yourself.</div>
-        </div>
+      <div style="margin-top:32px"><div class="sec-head"><div class="sec-dot reso"></div><div class="sec-label">Decision Rules</div></div>
+        <div style="font-size:12px;color:var(--text-dim);margin-bottom:12px">Reference these when you're tempted to deviate.</div>
+        <div class="os-decision-card"><div class="os-q">Should I take this call/meeting?</div><div class="os-a">Does this person have providers in their network, hotel/STR owners in their network, or knowledge I can't Google? If no → decline or 15 min max.</div></div>
+        <div class="os-decision-card"><div class="os-q">Should I get involved in this Reso ops issue?</div><div class="os-a">Can my team solve it without me in the next 48 hours? If yes → don't touch it. If no → spend max 2 hours, then hand it back.</div></div>
+        <div class="os-decision-card"><div class="os-q">Should I spend time on this LHR thing?</div><div class="os-a">Is it an acquisition or a project worth $50k+ in value? If no → delegate. If yes → bring it to your weekly planning block.</div></div>
+        <div class="os-decision-card"><div class="os-q">Should I pursue this new opportunity?</div><div class="os-a">Does it directly feed Embark revenue, Reso revenue, or net worth growth? If no → say no. You are not allowed to add a 6th plate.</div></div>
+        <div class="os-decision-card"><div class="os-q">Magnum: Stay or Kill?</div><div class="os-a">60-day clock starts when the portal is live. 10 active ordering providers by deadline or it's done. No negotiating with yourself.</div></div>
       </div>
     </div>
-
     <textarea class="os-edit-area" id="osEditArea"></textarea>
-
-    <div id="osEditActions" style="display:none;margin-top:12px;">
-      <button class="btn-primary btn-mint" onclick="saveOsEdits()">Save Changes</button>
-    </div>
+    <div id="osEditActions" style="display:none;margin-top:12px"><button class="btn-primary btn-mint" onclick="saveOsEdits()">Save Changes</button></div>
   </div>
-
 </div>
 
-<!-- SCREENSHOT REPORT OVERLAY -->
+<!-- Report overlay -->
 <div class="report-overlay" id="reportOverlay">
   <button class="report-close" onclick="closeReport()">✕</button>
   <div class="report-inner" id="reportInner"></div>
 </div>
-
 <div class="toast" id="toast">Saved</div>
 
 <script>
-const LS='weeklyScorecard_v2';
+const LS='weeklyScorecard_v3';
+const LABELS_KEY='scorecard_labels_v1';
 let S=load();
+let LABELS=loadLabels();
 
-function load(){ try{ return JSON.parse(localStorage.getItem(LS))||{weeks:{}} }catch{return{weeks:{}}} }
-function save(){ try{ localStorage.setItem(LS,JSON.stringify(S)); }catch(e){ console.error('Save failed:',e); } }
+// ========== DEFAULT METRIC DEFINITIONS ==========
+// Order: Embark, Summit, Reso (then Discipline, Pipeline)
+const DEFAULT_SECTIONS = [
+  {
+    id:'embark', title:'Embark Pre-Launch', dot:'embark', icon:'🚀',
+    metrics:[
+      {id:'embark_added', label:'Providers added to target list', target:'TARGET: 20 (50 W/ VA)', type:'number'},
+      {id:'embark_research', label:'Providers personally researched', target:'TARGET: 10', type:'number'},
+      {id:'embark_convos', label:'Warm intro conversations', target:'TARGET: 3', type:'number'},
+      {id:'embark_total', label:'Total target list size', target:'CUMULATIVE', type:'number'}
+    ],
+    scoring:[{id:'embark_added',min:20},{id:'embark_research',min:10},{id:'embark_convos',min:3}]
+  },
+  {
+    id:'magnum', title:'Magnum / Summit', dot:'magnum', icon:'⚡',
+    metrics:[
+      {id:'mag_contacted', label:'Providers contacted', target:'TARGET: 10 (20 W/ VA)', type:'number'},
+      {id:'mag_portal', label:'Providers set up in portal', target:'CUMULATIVE', type:'number'},
+      {id:'mag_orders', label:'Orders placed this week', target:'WEEKLY', type:'number'}
+    ],
+    scoring:[{id:'mag_contacted',min:10}]
+  },
+  {
+    id:'reso', title:'Reso', dot:'reso', icon:'💎',
+    metrics:[
+      {id:'reso_proposals', label:'Proposals sent', target:'TARGET: 2', type:'number'},
+      {id:'reso_deals', label:'Deals closed this month', target:'TARGET: 2-3', type:'number'},
+      {id:'reso_pipeline', label:'Pipeline value (annual rev)', target:'ACTIVE PROPOSALS', type:'currency'}
+    ],
+    scoring:[{id:'reso_proposals',min:2}]
+  },
+  {
+    id:'discipline', title:'Discipline', dot:'discipline', icon:'🔒',
+    metrics:[
+      {id:'dw_mon', label:'Deep work Mon 8–11am (or 3 hours)', target:'PROTECTED BLOCK', type:'toggle'},
+      {id:'dw_thu', label:'Deep work Thu 8–11am (or 3 hours)', target:'PROTECTED BLOCK', type:'toggle'},
+      {id:'gym', label:'5:30am gym days', target:'TARGET: 4', type:'counter'},
+      {id:'lhr', label:'LHR hours this week', target:'TARGET: UNDER 5', type:'decimal'}
+    ],
+    scoring:[{id:'dw_mon',bool:true},{id:'dw_thu',bool:true},{id:'gym',min:4},{id:'lhr',max:5}]
+  },
+  {
+    id:'pipeline', title:'Pipeline Snapshot', dot:'pipeline', icon:'📊',
+    metrics:[
+      {id:'pipe_embark', label:'Embark — est. annual revenue', target:'IF PIPELINE CLOSES', type:'currency'},
+      {id:'pipe_summit', label:'Summit — est. annual revenue', target:'IF PIPELINE CLOSES', type:'currency'},
+      {id:'pipe_reso', label:'Reso — est. annual revenue', target:'IF PIPELINE CLOSES', type:'currency'}
+    ],
+    scoring:[]
+  }
+];
+
+function getLabel(metricId, field){
+  if(LABELS[metricId] && LABELS[metricId][field]) return LABELS[metricId][field];
+  for(const sec of DEFAULT_SECTIONS) for(const m of sec.metrics) if(m.id===metricId) return m[field];
+  return '';
+}
+function getSectionTitle(secId){
+  if(LABELS['__sec_'+secId]) return LABELS['__sec_'+secId];
+  for(const sec of DEFAULT_SECTIONS) if(sec.id===secId) return sec.title;
+  return '';
+}
+
+// ========== STORAGE ==========
+function load(){try{return JSON.parse(localStorage.getItem(LS))||{weeks:{}}}catch{return{weeks:{}}}}
+function save(){try{localStorage.setItem(LS,JSON.stringify(S))}catch(e){console.error('Save failed:',e)}}
+function loadLabels(){try{return JSON.parse(localStorage.getItem(LABELS_KEY))||{}}catch{return{}}}
+function saveLabels(){try{localStorage.setItem(LABELS_KEY,JSON.stringify(LABELS))}catch(e){console.error('Label save failed:',e)}}
+
 function wk(){
-  // Timezone-safe: use local date parts to avoid UTC shifting
-  const now=new Date();
-  const day=now.getDay(); // 0=Sun
-  const diff=day===0?6:day-1; // days since Monday
-  const mon=new Date(now.getFullYear(), now.getMonth(), now.getDate()-diff);
-  const y=mon.getFullYear();
-  const m=String(mon.getMonth()+1).padStart(2,'0');
-  const d=String(mon.getDate()).padStart(2,'0');
-  return `${y}-${m}-${d}`;
+  const now=new Date();const day=now.getDay();const diff=day===0?6:day-1;
+  const mon=new Date(now.getFullYear(),now.getMonth(),now.getDate()-diff);
+  return `${mon.getFullYear()}-${String(mon.getMonth()+1).padStart(2,'0')}-${String(mon.getDate()).padStart(2,'0')}`;
 }
 function wkLabel(key){
-  if(key){
-    const parts=key.split('-');
-    const d=new Date(parseInt(parts[0]), parseInt(parts[1])-1, parseInt(parts[2]));
-    return 'WEEK OF '+d.toLocaleDateString('en-US',{month:'short',day:'numeric'}).toUpperCase();
-  }
-  const now=new Date();
-  const day=now.getDay();
-  const diff=day===0?6:day-1;
-  const mon=new Date(now.getFullYear(), now.getMonth(), now.getDate()-diff);
-  return 'WEEK OF '+mon.toLocaleDateString('en-US',{month:'short',day:'numeric'}).toUpperCase();
+  const d=key?parseDateKey(key):(()=>{const now=new Date();const day=now.getDay();const diff=day===0?6:day-1;return new Date(now.getFullYear(),now.getMonth(),now.getDate()-diff)})();
+  return 'WEEK OF '+d.toLocaleDateString('en-US',{month:'short',day:'numeric'}).toUpperCase();
 }
-function cw(){ const k=wk(); if(!S.weeks[k]) S.weeks[k]={big3:['','',''],big3Done:[false,false,false],friday:null,submitted:false}; return S.weeks[k]; }
-function toast(m){ const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000); }
+function parseDateKey(k){const p=k.split('-');return new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2]))}
+function cw(){const k=wk();if(!S.weeks[k])S.weeks[k]={big3:['','',''],big3Done:[false,false,false],friday:null,submitted:false};return S.weeks[k]}
+function toast(m){const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000)}
 
-// Tabs
+const CHK_SVG='<svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#08080c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+// ========== TABS ==========
 document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
   document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
@@ -755,16 +411,108 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
   document.getElementById('view'+map[t.dataset.tab]).classList.add('active');
 }));
 
-function tog(el){ el.classList.toggle('on'); }
-function adj(id,d){ const el=document.getElementById(id); let v=parseInt(el.textContent)||0; el.textContent=Math.max(0,Math.min(7,v+d)); }
-function nv(id){ return parseFloat(document.getElementById(id).value)||0; }
-function sv(id,v){ if(v!==undefined && v!==null && v!=='') document.getElementById(id).value=v; }
+// ========== RENDER FRIDAY SECTIONS ==========
+function renderFridaySections(){
+  const container=document.getElementById('fridaySections');
+  let html='';
+  for(const sec of DEFAULT_SECTIONS){
+    const secTitle=getSectionTitle(sec.id);
+    html+=`<div class="section" data-sec="${sec.id}">
+      <div class="sec-head">
+        <div class="sec-dot ${sec.dot}"></div>
+        <div class="sec-label">${secTitle}</div>
+        <button class="sec-edit-btn" onclick="toggleSectionEdit('${sec.id}',this)" title="Edit labels">✏️</button>
+      </div>`;
+    for(const m of sec.metrics){
+      const label=getLabel(m.id,'label');
+      const target=getLabel(m.id,'target');
+      if(m.type==='toggle'){
+        html+=`<div class="toggle-card" onclick="if(!this.classList.contains('editing'))tog(this)" id="f_${m.id}" data-metric="${m.id}">
+          <div>
+            <div class="card-label">${label}</div>
+            <input class="card-label-edit" value="${label}" data-field="label" data-mid="${m.id}">
+            <div class="card-target">${target}</div>
+            <input class="card-target-edit" value="${target}" data-field="target" data-mid="${m.id}">
+          </div>
+          <div class="check-box">${CHK_SVG}</div>
+        </div>`;
+      } else if(m.type==='counter'){
+        html+=`<div class="card" data-metric="${m.id}"><div class="card-row"><div>
+          <div class="card-label">${label}</div>
+          <input class="card-label-edit" value="${label}" data-field="label" data-mid="${m.id}">
+          <div class="card-target">${target}</div>
+          <input class="card-target-edit" value="${target}" data-field="target" data-mid="${m.id}">
+        </div>
+        <div class="ctr"><button class="ctr-btn" onclick="adj('f_${m.id}',-1)">−</button><div class="ctr-val" id="f_${m.id}">0</div><button class="ctr-btn" onclick="adj('f_${m.id}',1)">+</button></div>
+        </div></div>`;
+      } else if(m.type==='currency'){
+        html+=`<div class="card" data-metric="${m.id}"><div class="card-row"><div>
+          <div class="card-label">${label}</div>
+          <input class="card-label-edit" value="${label}" data-field="label" data-mid="${m.id}">
+          <div class="card-target">${target}</div>
+          <input class="card-target-edit" value="${target}" data-field="target" data-mid="${m.id}">
+        </div>
+        <div style="display:flex;align-items:center;gap:4px"><span style="color:var(--text-dim);font-size:13px">$</span><input class="num-input wide" type="number" id="f_${m.id}" inputmode="numeric" placeholder="0"></div>
+        </div></div>`;
+      } else if(m.type==='decimal'){
+        html+=`<div class="card" data-metric="${m.id}"><div class="card-row"><div>
+          <div class="card-label">${label}</div>
+          <input class="card-label-edit" value="${label}" data-field="label" data-mid="${m.id}">
+          <div class="card-target">${target}</div>
+          <input class="card-target-edit" value="${target}" data-field="target" data-mid="${m.id}">
+        </div>
+        <input class="num-input" type="number" id="f_${m.id}" inputmode="decimal" placeholder="0" step="0.5">
+        </div></div>`;
+      } else {
+        html+=`<div class="card" data-metric="${m.id}"><div class="card-row"><div>
+          <div class="card-label">${label}</div>
+          <input class="card-label-edit" value="${label}" data-field="label" data-mid="${m.id}">
+          <div class="card-target">${target}</div>
+          <input class="card-target-edit" value="${target}" data-field="target" data-mid="${m.id}">
+        </div>
+        <input class="num-input" type="number" id="f_${m.id}" inputmode="numeric" placeholder="0">
+        </div></div>`;
+      }
+    }
+    html+=`</div>`;
+  }
+  container.innerHTML=html;
+}
 
-// Monday
+function toggleSectionEdit(secId, btn){
+  const sec=document.querySelector(`[data-sec="${secId}"]`);
+  const cards=sec.querySelectorAll('.card, .toggle-card');
+  const isEditing=btn.classList.contains('editing');
+  if(isEditing){
+    // Save edits
+    sec.querySelectorAll('.card-label-edit, .card-target-edit').forEach(inp=>{
+      const mid=inp.dataset.mid, field=inp.dataset.field;
+      if(!LABELS[mid]) LABELS[mid]={};
+      LABELS[mid][field]=inp.value;
+    });
+    saveLabels();
+    cards.forEach(c=>c.classList.remove('editing'));
+    btn.classList.remove('editing');
+    // Re-render to apply
+    renderFridaySections();
+    loadFriday();
+    toast('Labels saved ✅');
+  } else {
+    cards.forEach(c=>c.classList.add('editing'));
+    btn.classList.add('editing');
+  }
+}
+
+function tog(el){el.classList.toggle('on')}
+function adj(id,d){const el=document.getElementById(id);let v=parseInt(el.textContent)||0;el.textContent=Math.max(0,Math.min(7,v+d))}
+function nv(id){const el=document.getElementById(id);return el?parseFloat(el.value)||0:0}
+function sv(id,v){const el=document.getElementById(id);if(el&&v!==undefined&&v!==null&&v!=='')el.value=v}
+
+// ========== MONDAY ==========
 function saveMondayPlan(){
   const w=cw();
   w.big3=[document.getElementById('big3_1').value.trim(),document.getElementById('big3_2').value.trim(),document.getElementById('big3_3').value.trim()];
-  w.mondayLocked=true; save(); toast('Big 3 locked in 🔒'); updateStatus(); renderBig3Review();
+  w.mondayLocked=true;save();toast('Big 3 locked in 🔒');updateStatus();renderBig3Review();
 }
 function loadMonday(){
   const w=cw();
@@ -775,183 +523,170 @@ function loadMonday(){
 ['big3_1','big3_2','big3_3'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{
   const w=cw();w.big3=[document.getElementById('big3_1').value.trim(),document.getElementById('big3_2').value.trim(),document.getElementById('big3_3').value.trim()];save();
 }));
-
-// Save state when app goes to background or closes (critical for mobile)
-document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='hidden') save(); });
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')save()});
 window.addEventListener('pagehide',()=>save());
 window.addEventListener('beforeunload',()=>save());
 
-// Big 3 Review on Friday
 function renderBig3Review(){
   const w=cw(),c=document.getElementById('big3Review');
   if(!w.big3||w.big3.every(b=>!b)){c.innerHTML='<div class="empty-state" style="padding:16px"><p style="font-size:11px">Set Big 3 on Monday first</p></div>';return;}
   c.innerHTML=w.big3.map((t,i)=>t?`<div class="toggle-card ${w.big3Done[i]?'on':''}" onclick="togBig3(this,${i})" data-i="${i}">
     <div><div class="card-label">${t}</div><div class="card-target">PRIORITY ${i+1}</div></div>
-    <div class="check-box"><svg width="13" height="13" viewBox="0 0 14 14" fill="none"><path d="M2 7L5.5 10.5L12 3.5" stroke="#08080c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="check-box">${CHK_SVG}</div>
   </div>`:'').join('');
 }
-function togBig3(el,i){ el.classList.toggle('on'); const w=cw(); w.big3Done[i]=el.classList.contains('on'); save(); }
+function togBig3(el,i){el.classList.toggle('on');const w=cw();w.big3Done[i]=el.classList.contains('on');save()}
 
-// Friday submit / update
+// ========== FRIDAY SUBMIT ==========
+function gatherFridayData(){
+  const data={};
+  for(const sec of DEFAULT_SECTIONS){
+    for(const m of sec.metrics){
+      if(m.type==='toggle'){
+        const el=document.getElementById('f_'+m.id);
+        data[m.id]=el?el.classList.contains('on'):false;
+      } else if(m.type==='counter'){
+        data[m.id]=parseInt(document.getElementById('f_'+m.id)?.textContent)||0;
+      } else {
+        data[m.id]=nv('f_'+m.id);
+      }
+    }
+  }
+  return data;
+}
+
 function submitFriday(){
-  const w=cw(), isEdit=w.submitted;
-  w.friday={
-    embark_added:nv('f_embark_added'), embark_research:nv('f_embark_research'),
-    embark_convos:nv('f_embark_convos'), embark_total:nv('f_embark_total'),
-    reso_proposals:nv('f_reso_proposals'), reso_deals:nv('f_reso_deals'), reso_pipeline:nv('f_reso_pipeline'),
-    mag_contacted:nv('f_mag_contacted'), mag_portal:nv('f_mag_portal'), mag_orders:nv('f_mag_orders'),
-    dw_mon:document.getElementById('f_dw_mon').classList.contains('on'),
-    dw_thu:document.getElementById('f_dw_thu').classList.contains('on'),
-    gym:parseInt(document.getElementById('f_gym').textContent)||0,
-    lhr:nv('f_lhr'),
-    pipe_embark:nv('f_pipe_embark'), pipe_reso:nv('f_pipe_reso')
-  };
-  w.big3Done=w.big3.map((_,i)=>{const r=document.querySelector(`#big3Review .toggle-card[data-i="${i}"]`);return r?r.classList.contains('on'):(w.big3Done[i]||false);});
-  w.submitted=true; w.submittedAt=new Date().toISOString(); save();
+  const w=cw(),isEdit=w.submitted;
+  w.friday=gatherFridayData();
+  w.big3Done=w.big3.map((_,i)=>{const r=document.querySelector(`#big3Review .toggle-card[data-i="${i}"]`);return r?r.classList.contains('on'):(w.big3Done[i]||false)});
+  w.submitted=true;w.submittedAt=new Date().toISOString();save();
   toast(isEdit?'Report updated ✅':'Friday report submitted ✅');
-  updateStatus(); renderDash(); renderHistory(); updateFridayBtn();
+  updateStatus();renderDash();renderHistory();updateFridayBtn();
 }
 
 function updateFridayBtn(){
-  const w=cw(), btn=document.getElementById('fridaySubmitBtn'), banner=document.getElementById('editBanner');
-  if(w.submitted){ btn.textContent='Update Report'; btn.className='btn-primary btn-blue'; banner.classList.add('show'); }
-  else { btn.textContent='Submit Friday Report'; btn.className='btn-primary btn-mint'; banner.classList.remove('show'); }
+  const w=cw(),btn=document.getElementById('fridaySubmitBtn'),banner=document.getElementById('editBanner');
+  if(w.submitted){btn.textContent='Update Report';btn.className='btn-primary btn-blue';banner.classList.add('show')}
+  else{btn.textContent='Submit Friday Report';btn.className='btn-primary btn-mint';banner.classList.remove('show')}
 }
 
 function loadFriday(){
-  const w=cw(); if(!w.friday) return; const f=w.friday;
-  sv('f_embark_added',f.embark_added); sv('f_embark_research',f.embark_research);
-  sv('f_embark_convos',f.embark_convos); sv('f_embark_total',f.embark_total);
-  sv('f_reso_proposals',f.reso_proposals); sv('f_reso_deals',f.reso_deals); sv('f_reso_pipeline',f.reso_pipeline);
-  sv('f_mag_contacted',f.mag_contacted); sv('f_mag_portal',f.mag_portal); sv('f_mag_orders',f.mag_orders);
-  if(f.dw_mon) document.getElementById('f_dw_mon').classList.add('on');
-  if(f.dw_thu) document.getElementById('f_dw_thu').classList.add('on');
-  document.getElementById('f_gym').textContent=f.gym||0;
-  sv('f_lhr',f.lhr); sv('f_pipe_embark',f.pipe_embark); sv('f_pipe_reso',f.pipe_reso);
+  const w=cw();if(!w.friday)return;const f=w.friday;
+  for(const sec of DEFAULT_SECTIONS){
+    for(const m of sec.metrics){
+      if(m.type==='toggle'){
+        const el=document.getElementById('f_'+m.id);
+        if(el&&f[m.id])el.classList.add('on');
+      } else if(m.type==='counter'){
+        const el=document.getElementById('f_'+m.id);
+        if(el)el.textContent=f[m.id]||0;
+      } else {
+        sv('f_'+m.id,f[m.id]);
+      }
+    }
+  }
 }
 
-// Scoring
+function loadWeekIntoFriday(key){
+  const w=S.weeks[key];if(!w)return;
+  document.getElementById('big3_1').value=w.big3[0]||'';
+  document.getElementById('big3_2').value=w.big3[1]||'';
+  document.getElementById('big3_3').value=w.big3[2]||'';
+  renderBig3Review();
+  if(w.friday){
+    const f=w.friday;
+    for(const sec of DEFAULT_SECTIONS){
+      for(const m of sec.metrics){
+        if(m.type==='toggle'){
+          const el=document.getElementById('f_'+m.id);
+          if(el){el.classList.remove('on');if(f[m.id])el.classList.add('on')}
+        } else if(m.type==='counter'){
+          const el=document.getElementById('f_'+m.id);
+          if(el)el.textContent=f[m.id]||0;
+        } else {
+          sv('f_'+m.id,f[m.id]);
+        }
+      }
+    }
+  }
+  updateFridayBtn();
+}
+
+// ========== SCORING ==========
 function grade(w){
-  if(!w.friday) return {pct:0,letter:'—',hits:0,total:0};
-  const f=w.friday; let h=0,t=0;
-  t+=3; if(f.embark_added>=20)h++; if(f.embark_research>=10)h++; if(f.embark_convos>=3)h++;
-  t+=1; if(f.reso_proposals>=2)h++;
-  t+=1; if(f.mag_contacted>=10)h++;
-  t+=3; if(f.dw_mon)h++; if(f.dw_thu)h++; if(f.gym>=4)h++;
-  t+=1; if(f.lhr<=5)h++;
+  if(!w.friday)return{pct:0,letter:'—',hits:0,total:0};
+  const f=w.friday;let h=0,t=0;
+  for(const sec of DEFAULT_SECTIONS){
+    for(const s of sec.scoring){
+      t++;
+      if(s.bool&&f[s.id])h++;
+      else if(s.min!==undefined&&f[s.id]>=s.min)h++;
+      else if(s.max!==undefined&&f[s.id]<=s.max)h++;
+    }
+  }
   const b3=w.big3.filter(b=>b).length;
-  if(b3>0){t+=b3; h+=(w.big3Done||[]).filter(Boolean).length;}
+  if(b3>0){t+=b3;h+=(w.big3Done||[]).filter(Boolean).length}
   const pct=t>0?Math.round(h/t*100):0;
-  let letter='F'; if(pct>=90)letter='A'; else if(pct>=80)letter='B+'; else if(pct>=70)letter='B'; else if(pct>=60)letter='C+'; else if(pct>=50)letter='C'; else if(pct>=40)letter='D';
-  return {pct,letter,hits:h,total:t};
+  let letter='F';if(pct>=90)letter='A';else if(pct>=80)letter='B+';else if(pct>=70)letter='B';else if(pct>=60)letter='C+';else if(pct>=50)letter='C';else if(pct>=40)letter='D';
+  return{pct,letter,hits:h,total:t};
 }
-function gc(l){ if(l.startsWith('A'))return'var(--mint)'; if(l.startsWith('B'))return'var(--blue)'; if(l.startsWith('C'))return'var(--amber)'; return'var(--red)'; }
+function gc(l){if(l.startsWith('A'))return'var(--mint)';if(l.startsWith('B'))return'var(--blue)';if(l.startsWith('C'))return'var(--amber)';return'var(--red)'}
 
-// Dashboard
+// ========== DASHBOARD ==========
 function renderDash(){
   const c=document.getElementById('dashContent');
   const submitted=Object.entries(S.weeks).filter(([_,w])=>w.submitted).sort((a,b)=>b[0].localeCompare(a[0]));
-  if(!submitted.length){c.innerHTML='<div class="empty-state"><div class="empty-icon">📊</div><p>Submit your first Friday report to see your dashboard.</p></div>';return;}
-
-  const curr=submitted[0]; const g=grade(curr[1]); const f=curr[1].friday;
+  if(!submitted.length){c.innerHTML='<div class="empty-state"><div class="empty-icon">📊</div><p>Submit your first Friday report to see your dashboard.</p></div>';return}
+  const curr=submitted[0];const g=grade(curr[1]);const f=curr[1].friday;
   const fmtM=n=>n?'$'+Number(n).toLocaleString():'$0';
-
-  // Averages
   const grades=submitted.map(([_,w])=>grade(w));
   const avgPct=Math.round(grades.reduce((s,g)=>s+g.pct,0)/grades.length);
-
-  // Streak
-  let streak=0; for(const [_,w] of submitted){ if(w.submitted)streak++; else break; }
-
+  let streak=0;for(const[_,w]of submitted){if(w.submitted)streak++;else break}
   let html=`
   <div class="dash-grade-row">
-    <div class="dash-grade-box">
-      <div class="dash-grade-big" style="color:${gc(g.letter)}">${g.letter}</div>
-      <div class="dash-grade-sub">This Week · ${g.pct}%</div>
-    </div>
-    <div class="dash-grade-box">
-      <div class="dash-grade-big" style="color:var(--text)">${avgPct}%</div>
-      <div class="dash-grade-sub">Avg Score</div>
-    </div>
+    <div class="dash-grade-box"><div class="dash-grade-big" style="color:${gc(g.letter)}">${g.letter}</div><div class="dash-grade-sub">This Week · ${g.pct}%</div></div>
+    <div class="dash-grade-box"><div class="dash-grade-big" style="color:var(--text)">${avgPct}%</div><div class="dash-grade-sub">Avg Score</div></div>
   </div>
   <div class="dash-stat-grid">
     <div class="dash-stat"><div class="dash-stat-val">${g.hits}/${g.total}</div><div class="dash-stat-label">Targets hit</div></div>
     <div class="dash-stat"><div class="dash-stat-val">${streak}</div><div class="dash-stat-label">Week streak</div></div>
-    <div class="dash-stat"><div class="dash-stat-val" style="color:var(--mint)">${fmtM(f.pipe_embark)}</div><div class="dash-stat-label">Embark pipeline/mo</div></div>
-    <div class="dash-stat"><div class="dash-stat-val" style="color:var(--purple)">${fmtM(f.pipe_reso)}</div><div class="dash-stat-label">Reso pipeline/yr</div></div>
+    <div class="dash-stat"><div class="dash-stat-val" style="color:var(--blue)">${fmtM(f.pipe_embark)}</div><div class="dash-stat-label">Embark /yr</div></div>
+    <div class="dash-stat"><div class="dash-stat-val" style="color:var(--amber)">${fmtM(f.pipe_summit)}</div><div class="dash-stat-label">Summit /yr</div></div>
+    <div class="dash-stat" style="grid-column:span 2"><div class="dash-stat-val" style="color:var(--purple)">${fmtM(f.pipe_reso)}</div><div class="dash-stat-label">Reso /yr</div></div>
   </div>`;
-
-  // Trend bars (last 8 weeks)
   if(submitted.length>1){
     const recent=submitted.slice(0,8).reverse();
     html+=`<div class="trend-section"><div class="trend-title">Score Trend</div>`;
     recent.forEach(([key,w])=>{
-      const g2=grade(w);
-      const d=parseDateKey(key);
-      const lbl=d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
-      let barColor='var(--mint)'; if(g2.pct<70)barColor='var(--amber)'; if(g2.pct<50)barColor='var(--red)';
-      html+=`<div class="trend-row">
-        <div class="trend-week">${lbl}</div>
-        <div class="trend-bar-bg"><div class="trend-bar" style="width:${g2.pct}%;background:${barColor};color:var(--bg)">${g2.pct>20?g2.pct+'%':''}</div></div>
-        <div class="trend-grade" style="color:${gc(g2.letter)}">${g2.letter}</div>
-      </div>`;
+      const g2=grade(w);const d=parseDateKey(key);const lbl=d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+      let barColor='var(--mint)';if(g2.pct<70)barColor='var(--amber)';if(g2.pct<50)barColor='var(--red)';
+      html+=`<div class="trend-row"><div class="trend-week">${lbl}</div><div class="trend-bar-bg"><div class="trend-bar" style="width:${g2.pct}%;background:${barColor};color:var(--bg)">${g2.pct>20?g2.pct+'%':''}</div></div><div class="trend-grade" style="color:${gc(g2.letter)}">${g2.letter}</div></div>`;
     });
     html+=`</div>`;
   }
-
-  // Quick screenshot button
   html+=`<button class="btn-primary btn-ghost" style="margin-top:12px" onclick="openReport('${curr[0]}')">📸 View Screenshot Report</button>`;
-
   c.innerHTML=html;
-  // Animate bars
-  setTimeout(()=>{ document.querySelectorAll('.trend-bar').forEach(b=>{ const w=b.style.width; b.style.width='0'; requestAnimationFrame(()=>b.style.width=w); }); },50);
+  setTimeout(()=>{document.querySelectorAll('.trend-bar').forEach(b=>{const w=b.style.width;b.style.width='0';requestAnimationFrame(()=>b.style.width=w)})},50);
 }
 
-// History
+// ========== HISTORY ==========
 function renderHistory(){
   const c=document.getElementById('histContent');
   const weeks=Object.entries(S.weeks).filter(([_,w])=>w.submitted).sort((a,b)=>b[0].localeCompare(a[0]));
-  if(!weeks.length){c.innerHTML='<div class="empty-state"><div class="empty-icon">📚</div><p>Weekly reports appear here. Build the streak.</p></div>';return;}
+  if(!weeks.length){c.innerHTML='<div class="empty-state"><div class="empty-icon">📚</div><p>Weekly reports appear here.</p></div>';return}
   c.innerHTML=weeks.map(([key,w])=>{
-    const g=grade(w);
-    const d=parseDateKey(key);
-    const lbl=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
+    const g=grade(w);const d=parseDateKey(key);
     return `<div class="hist-item" onclick="openReport('${key}')">
-      <div>
-        <div class="hist-week">Week of ${d.toLocaleDateString('en-US',{month:'short',day:'numeric'})}</div>
-        <div class="hist-date">${g.hits}/${g.total} targets · ${lbl}</div>
-        <div class="hist-actions">
-          <span class="hist-btn" onclick="event.stopPropagation();editWeek('${key}')">EDIT</span>
-          <span class="hist-btn" onclick="event.stopPropagation();openReport('${key}')">REPORT</span>
-        </div>
-      </div>
+      <div><div class="hist-week">Week of ${d.toLocaleDateString('en-US',{month:'short',day:'numeric'})}</div>
+      <div class="hist-date">${g.hits}/${g.total} targets · ${g.pct}%</div>
+      <div class="hist-actions"><span class="hist-btn" onclick="event.stopPropagation();editWeek('${key}')">EDIT</span><span class="hist-btn" onclick="event.stopPropagation();openReport('${key}')">REPORT</span></div></div>
       <div class="hist-grade" style="color:${gc(g.letter)}">${g.letter}</div>
     </div>`;
   }).join('');
 }
 
 function editWeek(key){
-  // Load that week's data into the Friday form
-  const w=S.weeks[key]; if(!w) return;
-  // Set big3
-  document.getElementById('big3_1').value=w.big3[0]||'';
-  document.getElementById('big3_2').value=w.big3[1]||'';
-  document.getElementById('big3_3').value=w.big3[2]||'';
-  renderBig3Review();
-  // Set friday data
-  if(w.friday){
-    const f=w.friday;
-    sv('f_embark_added',f.embark_added); sv('f_embark_research',f.embark_research);
-    sv('f_embark_convos',f.embark_convos); sv('f_embark_total',f.embark_total);
-    sv('f_reso_proposals',f.reso_proposals); sv('f_reso_deals',f.reso_deals); sv('f_reso_pipeline',f.reso_pipeline);
-    sv('f_mag_contacted',f.mag_contacted); sv('f_mag_portal',f.mag_portal); sv('f_mag_orders',f.mag_orders);
-    document.getElementById('f_dw_mon').classList.toggle('on',!!f.dw_mon);
-    document.getElementById('f_dw_thu').classList.toggle('on',!!f.dw_thu);
-    document.getElementById('f_gym').textContent=f.gym||0;
-    sv('f_lhr',f.lhr); sv('f_pipe_embark',f.pipe_embark); sv('f_pipe_reso',f.pipe_reso);
-  }
-  updateFridayBtn();
-  // Switch to Friday tab
+  loadWeekIntoFriday(key);
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
   document.querySelectorAll('.view').forEach(v=>v.classList.remove('active'));
   document.querySelector('[data-tab="friday"]').classList.add('active');
@@ -959,10 +694,10 @@ function editWeek(key){
   window.scrollTo(0,0);
 }
 
-// Screenshot Report
+// ========== SCREENSHOT REPORT ==========
 function openReport(key){
-  const w=S.weeks[key]; if(!w||!w.friday) return;
-  const f=w.friday, g=grade(w);
+  const w=S.weeks[key];if(!w||!w.friday)return;
+  const f=w.friday,g=grade(w);
   const ck=v=>v?'✓':'✗';
   const hm=(a,t,lower)=>lower?(a<=t?'✅':'❌'):(a>=t?'✅':(a>=t*0.7?'🟡':'❌'));
   const fmtM=n=>n?'$'+Number(n).toLocaleString():'$0';
@@ -972,172 +707,99 @@ function openReport(key){
   let big3Html='';
   if(w.big3&&w.big3.some(b=>b)){
     big3Html=`<div class="rpt-section"><div class="rpt-sec-title">Big 3</div>`;
-    w.big3.forEach((t,i)=>{if(t) big3Html+=`<div class="rpt-row"><span class="rpt-row-label">${ck(w.big3Done[i])} ${t}</span></div>`;});
+    w.big3.forEach((t,i)=>{if(t)big3Html+=`<div class="rpt-row"><span class="rpt-row-label">${ck(w.big3Done[i])} ${t}</span></div>`});
     big3Html+=`</div>`;
   }
 
   document.getElementById('reportInner').innerHTML=`
-    <div class="rpt-header">
-      <div class="rpt-name">Weekly Scorecard</div>
-      <div class="rpt-week">${wkLabel(key)}</div>
-      <div class="rpt-date">${weekStr}</div>
-    </div>
+    <div class="rpt-header"><div class="rpt-name">Weekly Scorecard</div><div class="rpt-week">${wkLabel(key)}</div><div class="rpt-date">${weekStr}</div></div>
     <div class="rpt-grade" style="color:${gc(g.letter)}">${g.letter}</div>
     <div class="rpt-pct">${g.hits} of ${g.total} targets hit · ${g.pct}%</div>
     ${big3Html}
-    <div class="rpt-section">
-      <div class="rpt-sec-title">Embark Pre-Launch</div>
-      <div class="rpt-row"><span class="rpt-row-label">Added to list</span><span class="rpt-row-val">${f.embark_added}/20 ${hm(f.embark_added,20)}</span></div>
-      <div class="rpt-row"><span class="rpt-row-label">Researched</span><span class="rpt-row-val">${f.embark_research}/10 ${hm(f.embark_research,10)}</span></div>
-      <div class="rpt-row"><span class="rpt-row-label">Warm intros</span><span class="rpt-row-val">${f.embark_convos}/3 ${hm(f.embark_convos,3)}</span></div>
-      <div class="rpt-row"><span class="rpt-row-label">Total list</span><span class="rpt-row-val">${f.embark_total}</span></div>
+    <div class="rpt-section"><div class="rpt-sec-title">${getSectionTitle('embark')}</div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('embark_added','label')}</span><span class="rpt-row-val">${f.embark_added||0}/20 ${hm(f.embark_added||0,20)}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('embark_research','label')}</span><span class="rpt-row-val">${f.embark_research||0}/10 ${hm(f.embark_research||0,10)}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('embark_convos','label')}</span><span class="rpt-row-val">${f.embark_convos||0}/3 ${hm(f.embark_convos||0,3)}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('embark_total','label')}</span><span class="rpt-row-val">${f.embark_total||0}</span></div>
     </div>
-    <div class="rpt-section">
-      <div class="rpt-sec-title">Reso</div>
-      <div class="rpt-row"><span class="rpt-row-label">Proposals</span><span class="rpt-row-val">${f.reso_proposals}/2 ${hm(f.reso_proposals,2)}</span></div>
-      <div class="rpt-row"><span class="rpt-row-label">Deals closed (mo)</span><span class="rpt-row-val">${f.reso_deals}</span></div>
-      <div class="rpt-row"><span class="rpt-row-label">Pipeline</span><span class="rpt-row-val">${fmtM(f.reso_pipeline)}</span></div>
+    <div class="rpt-section"><div class="rpt-sec-title">${getSectionTitle('magnum')}</div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('mag_contacted','label')}</span><span class="rpt-row-val">${f.mag_contacted||0}/10 ${hm(f.mag_contacted||0,10)}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('mag_portal','label')}</span><span class="rpt-row-val">${f.mag_portal||0}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('mag_orders','label')}</span><span class="rpt-row-val">${f.mag_orders||0}</span></div>
     </div>
-    <div class="rpt-section">
-      <div class="rpt-sec-title">Magnum / Summit</div>
-      <div class="rpt-row"><span class="rpt-row-label">Contacted</span><span class="rpt-row-val">${f.mag_contacted}/10 ${hm(f.mag_contacted,10)}</span></div>
-      <div class="rpt-row"><span class="rpt-row-label">In portal</span><span class="rpt-row-val">${f.mag_portal}</span></div>
-      <div class="rpt-row"><span class="rpt-row-label">Orders</span><span class="rpt-row-val">${f.mag_orders}</span></div>
+    <div class="rpt-section"><div class="rpt-sec-title">${getSectionTitle('reso')}</div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('reso_proposals','label')}</span><span class="rpt-row-val">${f.reso_proposals||0}/2 ${hm(f.reso_proposals||0,2)}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('reso_deals','label')}</span><span class="rpt-row-val">${f.reso_deals||0}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('reso_pipeline','label')}</span><span class="rpt-row-val">${fmtM(f.reso_pipeline)}</span></div>
     </div>
-    <div class="rpt-section">
-      <div class="rpt-sec-title">Discipline</div>
+    <div class="rpt-section"><div class="rpt-sec-title">${getSectionTitle('discipline')}</div>
       <div class="rpt-row"><span class="rpt-row-label">Deep work Mon</span><span class="rpt-row-val">${ck(f.dw_mon)}</span></div>
       <div class="rpt-row"><span class="rpt-row-label">Deep work Thu</span><span class="rpt-row-val">${ck(f.dw_thu)}</span></div>
-      <div class="rpt-row"><span class="rpt-row-label">Gym days</span><span class="rpt-row-val">${f.gym}/4 ${hm(f.gym,4)}</span></div>
-      <div class="rpt-row"><span class="rpt-row-label">LHR hours</span><span class="rpt-row-val">${f.lhr}h ${hm(f.lhr,5,true)}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('gym','label')}</span><span class="rpt-row-val">${f.gym||0}/4 ${hm(f.gym||0,4)}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('lhr','label')}</span><span class="rpt-row-val">${f.lhr||0}h ${hm(f.lhr||0,5,true)}</span></div>
     </div>
-    <div class="rpt-section">
-      <div class="rpt-sec-title">Pipeline Snapshot</div>
-      <div class="rpt-pipe-row"><span class="rpt-pipe-label">Embark /mo</span><span class="rpt-pipe-val">${fmtM(f.pipe_embark)}</span></div>
-      <div class="rpt-pipe-row"><span class="rpt-pipe-label">Reso /yr</span><span class="rpt-pipe-val">${fmtM(f.pipe_reso)}</span></div>
+    <div class="rpt-section"><div class="rpt-sec-title">Pipeline Snapshot (Annual)</div>
+      <div class="rpt-pipe-row"><span class="rpt-pipe-label">${getLabel('pipe_embark','label')}</span><span class="rpt-pipe-val">${fmtM(f.pipe_embark)}</span></div>
+      <div class="rpt-pipe-row"><span class="rpt-pipe-label">${getLabel('pipe_summit','label')}</span><span class="rpt-pipe-val">${fmtM(f.pipe_summit)}</span></div>
+      <div class="rpt-pipe-row"><span class="rpt-pipe-label">${getLabel('pipe_reso','label')}</span><span class="rpt-pipe-val">${fmtM(f.pipe_reso)}</span></div>
     </div>
-    <div class="rpt-footer"><div class="rpt-footer-text">Weekly Accountability Report</div></div>
+    <div style="text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim)">WEEKLY ACCOUNTABILITY REPORT</div></div>
   `;
   document.getElementById('reportOverlay').classList.add('open');
   document.body.style.overflow='hidden';
 }
-function closeReport(){
-  document.getElementById('reportOverlay').classList.remove('open');
-  document.body.style.overflow='';
-}
+function closeReport(){document.getElementById('reportOverlay').classList.remove('open');document.body.style.overflow=''}
 
-// OS View
-const OS_KEY = 'scriven_os_content';
+// ========== OS ==========
+const OS_KEY='scriven_os_content';
 function osMode(mode){
-  const formatted = document.getElementById('osFormatted');
-  const area = document.getElementById('osEditArea');
-  const actions = document.getElementById('osEditActions');
-  const viewBtn = document.getElementById('osViewBtn');
-  const editBtn = document.getElementById('osEditBtn');
-
+  const formatted=document.getElementById('osFormatted'),area=document.getElementById('osEditArea'),actions=document.getElementById('osEditActions');
   if(mode==='edit'){
-    // If user has saved custom content, load that; otherwise scrape formatted view
-    const saved = localStorage.getItem(OS_KEY);
-    if(saved){
-      area.value = saved;
-    } else {
-      area.value = formatted.innerText;
-    }
-    formatted.classList.add('hide');
-    area.classList.add('show');
-    actions.style.display='block';
-    viewBtn.classList.remove('active');
-    editBtn.classList.add('active');
+    const saved=localStorage.getItem(OS_KEY);
+    area.value=saved||formatted.innerText;
+    formatted.classList.add('hide');area.classList.add('show');actions.style.display='block';
+    document.getElementById('osViewBtn').classList.remove('active');document.getElementById('osEditBtn').classList.add('active');
   } else {
-    formatted.classList.remove('hide');
-    area.classList.remove('show');
-    actions.style.display='none';
-    viewBtn.classList.add('active');
-    editBtn.classList.remove('active');
-    // Re-render if custom content exists
-    const saved = localStorage.getItem(OS_KEY);
-    if(saved) renderOsFromText(saved);
+    formatted.classList.remove('hide');area.classList.remove('show');actions.style.display='none';
+    document.getElementById('osViewBtn').classList.add('active');document.getElementById('osEditBtn').classList.remove('active');
+    const saved=localStorage.getItem(OS_KEY);if(saved)renderOsFromText(saved);
   }
 }
-
-function saveOsEdits(){
-  const txt = document.getElementById('osEditArea').value;
-  localStorage.setItem(OS_KEY, txt);
-  renderOsFromText(txt);
-  osMode('view');
-  toast('Operating system updated ✅');
-}
-
+function saveOsEdits(){localStorage.setItem(OS_KEY,document.getElementById('osEditArea').value);renderOsFromText(document.getElementById('osEditArea').value);osMode('view');toast('Operating system updated ✅')}
 function renderOsFromText(txt){
-  const formatted = document.getElementById('osFormatted');
-  // Convert plain text back to styled HTML
-  const lines = txt.split('\n');
-  let html = '';
-  for(let i=0; i<lines.length; i++){
-    const line = lines[i].trim();
-    if(!line) { html += '<div style="height:12px"></div>'; continue; }
-
-    // Detect headers (all caps lines or lines with specific patterns)
-    if(line === line.toUpperCase() && line.length > 3 && !line.startsWith('$') && !/^\d/.test(line)){
-      // Section header
-      let dotClass = 'embark';
-      if(line.includes('MONDAY')) dotClass='embark';
-      else if(line.includes('TUESDAY')) dotClass='reso';
-      else if(line.includes('WEDNESDAY')) dotClass='discipline';
-      else if(line.includes('THURSDAY')) dotClass='magnum';
-      else if(line.includes('FRIDAY')) dotClass='pipeline';
-      else if(line.includes('NON-NEGOTIABLE') || line.includes('RULE')) dotClass='discipline';
-      else if(line.includes('DECISION')) dotClass='reso';
-      else if(line.includes('SCRIVEN') || line.includes('OPERATING')) dotClass='discipline';
-      html += `<div class="sec-head" style="margin-top:24px"><div class="sec-dot ${dotClass}"></div><div class="sec-label">${line}</div></div>`;
-    }
-    // Time blocks (contain | or time patterns)
-    else if(/^\d{1,2}:\d{2}/.test(line)){
-      const parts = line.split('|');
-      if(parts.length >= 2){
-        html += `<div class="os-block"><div class="os-time">${parts[0].trim()}</div><div class="os-desc">${parts.slice(1).join('|').trim()}</div></div>`;
-      } else {
-        html += `<div class="os-block"><div class="os-desc">${line}</div></div>`;
-      }
-    }
-    // Question lines (contain ?)
-    else if(line.endsWith('?')){
-      html += `<div class="os-decision-card"><div class="os-q">${line}</div>`;
-      // Look ahead for answer
-      if(i+1 < lines.length && lines[i+1].trim() && !lines[i+1].trim().endsWith('?')){
-        html += `<div class="os-a">${lines[i+1].trim()}</div>`;
-        i++;
-      }
-      html += `</div>`;
-    }
-    // Regular content
-    else {
-      html += `<div class="os-rule-card"><div class="os-desc">${line}</div></div>`;
-    }
+  const formatted=document.getElementById('osFormatted'),lines=txt.split('\n');let html='';
+  for(let i=0;i<lines.length;i++){
+    const line=lines[i].trim();
+    if(!line){html+='<div style="height:12px"></div>';continue}
+    if(line===line.toUpperCase()&&line.length>3&&!/^\d/.test(line)&&!line.startsWith('$')){
+      let dc='embark';if(line.includes('TUE'))dc='reso';else if(line.includes('WED'))dc='discipline';else if(line.includes('THU'))dc='magnum';else if(line.includes('FRI'))dc='pipeline';else if(line.includes('NON-NEG')||line.includes('RULE'))dc='discipline';else if(line.includes('DECISION'))dc='reso';
+      html+=`<div class="sec-head" style="margin-top:24px"><div class="sec-dot ${dc}"></div><div class="sec-label">${line}</div></div>`;
+    } else if(/^\d{1,2}:\d{2}/.test(line)){
+      const parts=line.split('|');
+      html+=parts.length>=2?`<div class="os-block"><div class="os-time">${parts[0].trim()}</div><div class="os-desc">${parts.slice(1).join('|').trim()}</div></div>`:`<div class="os-block"><div class="os-desc">${line}</div></div>`;
+    } else if(line.endsWith('?')){
+      html+=`<div class="os-decision-card"><div class="os-q">${line}</div>`;
+      if(i+1<lines.length&&lines[i+1].trim()&&!lines[i+1].trim().endsWith('?')){html+=`<div class="os-a">${lines[++i].trim()}</div>`}
+      html+=`</div>`;
+    } else {html+=`<div class="os-rule-card"><div class="os-desc">${line}</div></div>`}
   }
-  formatted.innerHTML = html;
+  formatted.innerHTML=html;
 }
+function initOs(){const saved=localStorage.getItem(OS_KEY);if(saved)renderOsFromText(saved)}
 
-// Load saved OS on init
-function initOs(){
-  const saved = localStorage.getItem(OS_KEY);
-  if(saved) renderOsFromText(saved);
-}
-
-// Status
+// ========== STATUS ==========
 function updateStatus(){
-  const w=cw(), b=document.getElementById('statusBadge');
-  if(w.submitted){b.textContent='DONE';b.className='badge badge-done';}
-  else if(w.mondayLocked){b.textContent='SCORE';b.className='badge badge-score';}
-  else{b.textContent='PLAN';b.className='badge badge-plan';}
+  const w=cw(),b=document.getElementById('statusBadge');
+  if(w.submitted){b.textContent='DONE';b.className='badge badge-done'}
+  else if(w.mondayLocked){b.textContent='SCORE';b.className='badge badge-score'}
+  else{b.textContent='PLAN';b.className='badge badge-plan'}
 }
 
-// Init
-// Safe date parse from key like "2026-02-16"
-function parseDateKey(key){ const p=key.split('-'); return new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2])); }
-console.log('[Scorecard] Week key:', wk(), '| Stored weeks:', Object.keys(S.weeks), '| Current week data:', JSON.stringify(cw()));
+// ========== INIT ==========
+console.log('[Scorecard] Week key:',wk(),'| Stored weeks:',Object.keys(S.weeks));
 document.getElementById('weekLabel').textContent=wkLabel();
-loadMonday(); loadFriday(); renderBig3Review(); renderDash(); renderHistory(); updateStatus(); updateFridayBtn(); initOs();
+renderFridaySections();
+loadMonday();loadFriday();renderBig3Review();renderDash();renderHistory();updateStatus();updateFridayBtn();initOs();
 </script>
 </body>
 </html>
