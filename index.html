@@ -719,12 +719,29 @@ const LS='weeklyScorecard_v2';
 let S=load();
 
 function load(){ try{ return JSON.parse(localStorage.getItem(LS))||{weeks:{}} }catch{return{weeks:{}}} }
-function save(){ localStorage.setItem(LS,JSON.stringify(S)); }
-function wk(){ const d=new Date(),m=new Date(d);m.setDate(d.getDate()-((d.getDay()+6)%7));return m.toISOString().split('T')[0]; }
+function save(){ try{ localStorage.setItem(LS,JSON.stringify(S)); }catch(e){ console.error('Save failed:',e); } }
+function wk(){
+  // Timezone-safe: use local date parts to avoid UTC shifting
+  const now=new Date();
+  const day=now.getDay(); // 0=Sun
+  const diff=day===0?6:day-1; // days since Monday
+  const mon=new Date(now.getFullYear(), now.getMonth(), now.getDate()-diff);
+  const y=mon.getFullYear();
+  const m=String(mon.getMonth()+1).padStart(2,'0');
+  const d=String(mon.getDate()).padStart(2,'0');
+  return `${y}-${m}-${d}`;
+}
 function wkLabel(key){
-  if(key){ const d=new Date(key+'T12:00:00'); return 'WEEK OF '+d.toLocaleDateString('en-US',{month:'short',day:'numeric'}).toUpperCase(); }
-  const d=new Date(),m=new Date(d);m.setDate(d.getDate()-((d.getDay()+6)%7));
-  return 'WEEK OF '+m.toLocaleDateString('en-US',{month:'short',day:'numeric'}).toUpperCase();
+  if(key){
+    const parts=key.split('-');
+    const d=new Date(parseInt(parts[0]), parseInt(parts[1])-1, parseInt(parts[2]));
+    return 'WEEK OF '+d.toLocaleDateString('en-US',{month:'short',day:'numeric'}).toUpperCase();
+  }
+  const now=new Date();
+  const day=now.getDay();
+  const diff=day===0?6:day-1;
+  const mon=new Date(now.getFullYear(), now.getMonth(), now.getDate()-diff);
+  return 'WEEK OF '+mon.toLocaleDateString('en-US',{month:'short',day:'numeric'}).toUpperCase();
 }
 function cw(){ const k=wk(); if(!S.weeks[k]) S.weeks[k]={big3:['','',''],big3Done:[false,false,false],friday:null,submitted:false}; return S.weeks[k]; }
 function toast(m){ const t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2000); }
@@ -741,7 +758,7 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
 function tog(el){ el.classList.toggle('on'); }
 function adj(id,d){ const el=document.getElementById(id); let v=parseInt(el.textContent)||0; el.textContent=Math.max(0,Math.min(7,v+d)); }
 function nv(id){ return parseFloat(document.getElementById(id).value)||0; }
-function sv(id,v){ if(v) document.getElementById(id).value=v; }
+function sv(id,v){ if(v!==undefined && v!==null && v!=='') document.getElementById(id).value=v; }
 
 // Monday
 function saveMondayPlan(){
@@ -758,6 +775,11 @@ function loadMonday(){
 ['big3_1','big3_2','big3_3'].forEach(id=>document.getElementById(id).addEventListener('input',()=>{
   const w=cw();w.big3=[document.getElementById('big3_1').value.trim(),document.getElementById('big3_2').value.trim(),document.getElementById('big3_3').value.trim()];save();
 }));
+
+// Save state when app goes to background or closes (critical for mobile)
+document.addEventListener('visibilitychange',()=>{ if(document.visibilityState==='hidden') save(); });
+window.addEventListener('pagehide',()=>save());
+window.addEventListener('beforeunload',()=>save());
 
 // Big 3 Review on Friday
 function renderBig3Review(){
@@ -865,7 +887,7 @@ function renderDash(){
     html+=`<div class="trend-section"><div class="trend-title">Score Trend</div>`;
     recent.forEach(([key,w])=>{
       const g2=grade(w);
-      const d=new Date(key+'T12:00:00');
+      const d=parseDateKey(key);
       const lbl=d.toLocaleDateString('en-US',{month:'short',day:'numeric'});
       let barColor='var(--mint)'; if(g2.pct<70)barColor='var(--amber)'; if(g2.pct<50)barColor='var(--red)';
       html+=`<div class="trend-row">
@@ -892,7 +914,7 @@ function renderHistory(){
   if(!weeks.length){c.innerHTML='<div class="empty-state"><div class="empty-icon">📚</div><p>Weekly reports appear here. Build the streak.</p></div>';return;}
   c.innerHTML=weeks.map(([key,w])=>{
     const g=grade(w);
-    const d=new Date(key+'T12:00:00');
+    const d=parseDateKey(key);
     const lbl=d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
     return `<div class="hist-item" onclick="openReport('${key}')">
       <div>
@@ -944,7 +966,7 @@ function openReport(key){
   const ck=v=>v?'✓':'✗';
   const hm=(a,t,lower)=>lower?(a<=t?'✅':'❌'):(a>=t?'✅':(a>=t*0.7?'🟡':'❌'));
   const fmtM=n=>n?'$'+Number(n).toLocaleString():'$0';
-  const d=new Date(key+'T12:00:00');
+  const d=parseDateKey(key);
   const weekStr=d.toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'});
 
   let big3Html='';
@@ -1111,6 +1133,9 @@ function updateStatus(){
 }
 
 // Init
+// Safe date parse from key like "2026-02-16"
+function parseDateKey(key){ const p=key.split('-'); return new Date(parseInt(p[0]),parseInt(p[1])-1,parseInt(p[2])); }
+console.log('[Scorecard] Week key:', wk(), '| Stored weeks:', Object.keys(S.weeks), '| Current week data:', JSON.stringify(cw()));
 document.getElementById('weekLabel').textContent=wkLabel();
 loadMonday(); loadFriday(); renderBig3Review(); renderDash(); renderHistory(); updateStatus(); updateFridayBtn(); initOs();
 </script>
