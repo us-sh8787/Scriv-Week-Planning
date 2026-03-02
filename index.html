@@ -169,6 +169,16 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 .edit-banner{display:none;background:rgba(247,166,59,0.1);border:1px solid rgba(247,166,59,0.3);border-radius:var(--radius-sm);padding:10px 14px;margin-bottom:16px;font-size:12px;color:var(--amber);text-align:center;font-family:'JetBrains Mono',monospace;letter-spacing:0.5px}
 .edit-banner.show{display:block}
 
+/* Identity block */
+.identity-block{margin-bottom:24px;padding:20px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);text-align:center;position:relative;overflow:hidden}
+.identity-block::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 300px 200px at 50% 120%,rgba(61,255,194,0.04) 0%,transparent 70%);pointer-events:none}
+.theme-row{display:flex;align-items:baseline;justify-content:center;gap:10px;margin-bottom:16px}
+.theme-year{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-dim);letter-spacing:2px;font-weight:500}
+.theme-word{font-family:'JetBrains Mono',monospace;font-size:28px;font-weight:800;letter-spacing:6px;color:var(--mint)}
+.values-row{display:flex;justify-content:center;gap:6px;margin-bottom:16px;flex-wrap:wrap}
+.value-chip{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:600;letter-spacing:2px;padding:5px 12px;border-radius:20px;border:1px solid var(--border);color:var(--text-mid);background:var(--surface2)}
+.enjoy-line{font-size:12px;color:var(--text-dim);font-style:italic;line-height:1.4;max-width:280px;margin:0 auto}
+
 /* OS */
 .os-section{margin-bottom:24px}
 .os-day-header{display:flex;align-items:center;gap:10px;margin-bottom:10px}
@@ -232,6 +242,19 @@ body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellips
 
   <!-- DASHBOARD -->
   <div class="view" id="viewDash">
+    <div class="identity-block">
+      <div class="theme-row">
+        <div class="theme-year">2026</div>
+        <div class="theme-word">PROCESS</div>
+      </div>
+      <div class="values-row">
+        <div class="value-chip">GRIT</div>
+        <div class="value-chip">JOY</div>
+        <div class="value-chip">IMPACT</div>
+        <div class="value-chip">INTEGRITY</div>
+      </div>
+      <div class="enjoy-line">the scoreboard matters — but don't forget to enjoy the game</div>
+    </div>
     <div id="dashContent"><div class="empty-state"><div class="empty-icon">📊</div><p>Submit your first Friday report to see your dashboard.</p></div></div>
   </div>
 
