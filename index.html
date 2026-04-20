@@ -345,51 +345,71 @@ let LABELS=loadLabels();
 // Order: Embark, Summit, Reso (then Discipline, Pipeline)
 const DEFAULT_SECTIONS = [
   {
-    id:'embark', title:'Embark Pre-Launch', dot:'embark', icon:'🚀',
+    id:'reso', title:'Reso — Build Pipeline, Close Clients', dot:'reso', icon:'💎',
     metrics:[
-      {id:'embark_added', label:'Providers added to target list', target:'TARGET: 20 (50 W/ VA)', type:'number'},
-      {id:'embark_research', label:'Providers personally researched', target:'TARGET: 10', type:'number'},
-      {id:'embark_convos', label:'Warm intro conversations', target:'TARGET: 3', type:'number'},
-      {id:'embark_total', label:'Total target list size', target:'CUMULATIVE', type:'number'}
-    ],
-    scoring:[{id:'embark_added',min:20},{id:'embark_research',min:10},{id:'embark_convos',min:3}]
-  },
-  {
-    id:'magnum', title:'Magnum / Summit', dot:'magnum', icon:'⚡',
-    metrics:[
-      {id:'mag_contacted', label:'Providers contacted', target:'TARGET: 10 (20 W/ VA)', type:'number'},
-      {id:'mag_portal', label:'Providers set up in portal', target:'CUMULATIVE', type:'number'},
-      {id:'mag_orders', label:'Orders placed this week', target:'WEEKLY', type:'number'}
-    ],
-    scoring:[{id:'mag_contacted',min:10}]
-  },
-  {
-    id:'reso', title:'Reso', dot:'reso', icon:'💎',
-    metrics:[
+      {id:'reso_leads', label:'Inbound leads this week', target:'TRACKING', type:'number'},
+      {id:'reso_discovery', label:'Discovery calls booked', target:'TRACKING', type:'number'},
       {id:'reso_proposals', label:'Proposals sent', target:'TARGET: 2', type:'number'},
       {id:'reso_deals', label:'Deals closed this month', target:'TARGET: 2-3', type:'number'},
-      {id:'reso_pipeline', label:'Pipeline value (annual rev)', target:'ACTIVE PROPOSALS', type:'currency'}
+      {id:'reso_pipeline', label:'Revenue signed this quarter', target:'CUMULATIVE', type:'currency'}
     ],
     scoring:[{id:'reso_proposals',min:2}]
   },
   {
-    id:'discipline', title:'Discipline', dot:'discipline', icon:'🔒',
+    id:'embark', title:'Embark — Stay In Your Lane (CRO)', dot:'embark', icon:'🚀',
     metrics:[
-      {id:'dw_mon', label:'Deep work Mon 8–11am (or 3 hours)', target:'PROTECTED BLOCK', type:'toggle'},
-      {id:'dw_thu', label:'Deep work Thu 8–11am (or 3 hours)', target:'PROTECTED BLOCK', type:'toggle'},
-      {id:'gym', label:'5:30am gym days', target:'TARGET: 4', type:'counter'},
-      {id:'lhr', label:'LHR hours this week', target:'TARGET: UNDER 5', type:'decimal'}
+      {id:'embark_tasks', label:'Pre-launch tasks completed on time', target:'WEEKLY DELIVERABLES', type:'number'},
+      {id:'embark_lane', label:'Stayed in CRO/biz dev role?', target:'NO OPS CREEP', type:'toggle'},
+      {id:'embark_top100', label:'Top 100 provider list progress', target:'CUMULATIVE', type:'number'}
     ],
-    scoring:[{id:'dw_mon',bool:true},{id:'dw_thu',bool:true},{id:'gym',min:4},{id:'lhr',max:5}]
+    scoring:[{id:'embark_lane',bool:true}]
   },
   {
-    id:'pipeline', title:'Pipeline Snapshot', dot:'pipeline', icon:'📊',
+    id:'lhr', title:'LHR — Strategic Growth Only', dot:'magnum', icon:'🏡',
     metrics:[
-      {id:'pipe_embark', label:'Embark — est. annual revenue', target:'IF PIPELINE CLOSES', type:'currency'},
-      {id:'pipe_summit', label:'Summit — est. annual revenue', target:'IF PIPELINE CLOSES', type:'currency'},
-      {id:'pipe_reso', label:'Reso — est. annual revenue', target:'IF PIPELINE CLOSES', type:'currency'}
+      {id:'lhr_hours', label:'Hours this week', target:'TARGET: UNDER 5', type:'decimal'},
+      {id:'lhr_acq', label:'Acquisition on track?', target:'ON TRACK / STALLED / N/A', type:'toggle'}
     ],
-    scoring:[]
+    scoring:[{id:'lhr_hours',max:5}]
+  },
+  {
+    id:'summit', title:'Summit — Steady, Minimal Time', dot:'pipeline', icon:'⚡',
+    metrics:[
+      {id:'summit_orders', label:'Orders this month', target:'CUMULATIVE', type:'number'},
+      {id:'summit_rev', label:'Commission revenue this month', target:'TRACKING', type:'currency'},
+      {id:'summit_hours', label:'Hours spent this week', target:'TARGET: UNDER 2', type:'decimal'}
+    ],
+    scoring:[{id:'summit_hours',max:2}]
+  },
+  {
+    id:'w2', title:'W2 — Don\'t Fall Behind', dot:'big3', icon:'🏢',
+    metrics:[
+      {id:'w2_current', label:'Current on all deliverables?', target:'STAY CLEAN', type:'toggle'},
+      {id:'w2_admin', label:'Admin cleared same day?', target:'NO PILE-UP', type:'toggle'}
+    ],
+    scoring:[{id:'w2_current',bool:true},{id:'w2_admin',bool:true}]
+  },
+  {
+    id:'discipline', title:'Discipline', dot:'discipline', icon:'🔒',
+    metrics:[
+      {id:'dw_mon', label:'Deep work block protected', target:'MON OR THU — 3 HOURS', type:'toggle'},
+      {id:'dw_thu', label:'Deep work block #2 protected', target:'MON OR THU — 3 HOURS', type:'toggle'},
+      {id:'morning', label:'Morning routine days', target:'TARGET: 5', type:'counter'},
+      {id:'family', label:'Phone-free family evenings', target:'TARGET: 5', type:'counter'}
+    ],
+    scoring:[{id:'dw_mon',bool:true},{id:'dw_thu',bool:true},{id:'morning',min:5},{id:'family',min:5}]
+  },
+  {
+    id:'health', title:'Health', dot:'embark', icon:'💪',
+    metrics:[
+      {id:'h_lifting', label:'Lifting sessions', target:'TARGET: 4', type:'counter'},
+      {id:'h_macros', label:'Macro tracking days', target:'TARGET: 6', type:'counter'},
+      {id:'h_drinks', label:'Alcohol drinks this week', target:'MAX: 4', type:'counter'},
+      {id:'h_tennis', label:'Tennis sessions', target:'TARGET: 1-2', type:'counter'},
+      {id:'h_steps', label:'10k step days', target:'TARGET: 5', type:'counter'},
+      {id:'h_sleep', label:'Sleep 7+ hours nights', target:'TARGET: 5', type:'counter'}
+    ],
+    scoring:[{id:'h_lifting',min:4},{id:'h_macros',min:6},{id:'h_drinks',max:4},{id:'h_steps',min:5},{id:'h_sleep',min:5}]
   }
 ];
 
@@ -739,32 +759,44 @@ function openReport(key){
     <div class="rpt-grade" style="color:${gc(g.letter)}">${g.letter}</div>
     <div class="rpt-pct">${g.hits} of ${g.total} targets hit · ${g.pct}%</div>
     ${big3Html}
-    <div class="rpt-section"><div class="rpt-sec-title">${getSectionTitle('embark')}</div>
-      <div class="rpt-row"><span class="rpt-row-label">${getLabel('embark_added','label')}</span><span class="rpt-row-val">${f.embark_added||0}/20 ${hm(f.embark_added||0,20)}</span></div>
-      <div class="rpt-row"><span class="rpt-row-label">${getLabel('embark_research','label')}</span><span class="rpt-row-val">${f.embark_research||0}/10 ${hm(f.embark_research||0,10)}</span></div>
-      <div class="rpt-row"><span class="rpt-row-label">${getLabel('embark_convos','label')}</span><span class="rpt-row-val">${f.embark_convos||0}/3 ${hm(f.embark_convos||0,3)}</span></div>
-      <div class="rpt-row"><span class="rpt-row-label">${getLabel('embark_total','label')}</span><span class="rpt-row-val">${f.embark_total||0}</span></div>
-    </div>
-    <div class="rpt-section"><div class="rpt-sec-title">${getSectionTitle('magnum')}</div>
-      <div class="rpt-row"><span class="rpt-row-label">${getLabel('mag_contacted','label')}</span><span class="rpt-row-val">${f.mag_contacted||0}/10 ${hm(f.mag_contacted||0,10)}</span></div>
-      <div class="rpt-row"><span class="rpt-row-label">${getLabel('mag_portal','label')}</span><span class="rpt-row-val">${f.mag_portal||0}</span></div>
-      <div class="rpt-row"><span class="rpt-row-label">${getLabel('mag_orders','label')}</span><span class="rpt-row-val">${f.mag_orders||0}</span></div>
-    </div>
     <div class="rpt-section"><div class="rpt-sec-title">${getSectionTitle('reso')}</div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('reso_leads','label')}</span><span class="rpt-row-val">${f.reso_leads||0}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('reso_discovery','label')}</span><span class="rpt-row-val">${f.reso_discovery||0}</span></div>
       <div class="rpt-row"><span class="rpt-row-label">${getLabel('reso_proposals','label')}</span><span class="rpt-row-val">${f.reso_proposals||0}/2 ${hm(f.reso_proposals||0,2)}</span></div>
       <div class="rpt-row"><span class="rpt-row-label">${getLabel('reso_deals','label')}</span><span class="rpt-row-val">${f.reso_deals||0}</span></div>
       <div class="rpt-row"><span class="rpt-row-label">${getLabel('reso_pipeline','label')}</span><span class="rpt-row-val">${fmtM(f.reso_pipeline)}</span></div>
     </div>
-    <div class="rpt-section"><div class="rpt-sec-title">${getSectionTitle('discipline')}</div>
-      <div class="rpt-row"><span class="rpt-row-label">Deep work Mon</span><span class="rpt-row-val">${ck(f.dw_mon)}</span></div>
-      <div class="rpt-row"><span class="rpt-row-label">Deep work Thu</span><span class="rpt-row-val">${ck(f.dw_thu)}</span></div>
-      <div class="rpt-row"><span class="rpt-row-label">${getLabel('gym','label')}</span><span class="rpt-row-val">${f.gym||0}/4 ${hm(f.gym||0,4)}</span></div>
-      <div class="rpt-row"><span class="rpt-row-label">${getLabel('lhr','label')}</span><span class="rpt-row-val">${f.lhr||0}h ${hm(f.lhr||0,5,true)}</span></div>
+    <div class="rpt-section"><div class="rpt-sec-title">${getSectionTitle('embark')}</div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('embark_tasks','label')}</span><span class="rpt-row-val">${f.embark_tasks||0}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('embark_lane','label')}</span><span class="rpt-row-val">${ck(f.embark_lane)}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('embark_top100','label')}</span><span class="rpt-row-val">${f.embark_top100||0}/100</span></div>
     </div>
-    <div class="rpt-section"><div class="rpt-sec-title">Pipeline Snapshot (Annual)</div>
-      <div class="rpt-pipe-row"><span class="rpt-pipe-label">${getLabel('pipe_embark','label')}</span><span class="rpt-pipe-val">${fmtM(f.pipe_embark)}</span></div>
-      <div class="rpt-pipe-row"><span class="rpt-pipe-label">${getLabel('pipe_summit','label')}</span><span class="rpt-pipe-val">${fmtM(f.pipe_summit)}</span></div>
-      <div class="rpt-pipe-row"><span class="rpt-pipe-label">${getLabel('pipe_reso','label')}</span><span class="rpt-pipe-val">${fmtM(f.pipe_reso)}</span></div>
+    <div class="rpt-section"><div class="rpt-sec-title">${getSectionTitle('lhr')}</div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('lhr_hours','label')}</span><span class="rpt-row-val">${f.lhr_hours||0}h ${hm(f.lhr_hours||0,5,true)}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('lhr_acq','label')}</span><span class="rpt-row-val">${ck(f.lhr_acq)}</span></div>
+    </div>
+    <div class="rpt-section"><div class="rpt-sec-title">${getSectionTitle('summit')}</div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('summit_orders','label')}</span><span class="rpt-row-val">${f.summit_orders||0}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('summit_rev','label')}</span><span class="rpt-row-val">${fmtM(f.summit_rev)}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('summit_hours','label')}</span><span class="rpt-row-val">${f.summit_hours||0}h ${hm(f.summit_hours||0,2,true)}</span></div>
+    </div>
+    <div class="rpt-section"><div class="rpt-sec-title">${getSectionTitle('w2')}</div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('w2_current','label')}</span><span class="rpt-row-val">${ck(f.w2_current)}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('w2_admin','label')}</span><span class="rpt-row-val">${ck(f.w2_admin)}</span></div>
+    </div>
+    <div class="rpt-section"><div class="rpt-sec-title">${getSectionTitle('discipline')}</div>
+      <div class="rpt-row"><span class="rpt-row-label">Deep work block #1</span><span class="rpt-row-val">${ck(f.dw_mon)}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">Deep work block #2</span><span class="rpt-row-val">${ck(f.dw_thu)}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('morning','label')}</span><span class="rpt-row-val">${f.morning||0}/5 ${hm(f.morning||0,5)}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('family','label')}</span><span class="rpt-row-val">${f.family||0}/5 ${hm(f.family||0,5)}</span></div>
+    </div>
+    <div class="rpt-section"><div class="rpt-sec-title">${getSectionTitle('health')}</div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('h_lifting','label')}</span><span class="rpt-row-val">${f.h_lifting||0}/4 ${hm(f.h_lifting||0,4)}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('h_macros','label')}</span><span class="rpt-row-val">${f.h_macros||0}/6 ${hm(f.h_macros||0,6)}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('h_drinks','label')}</span><span class="rpt-row-val">${f.h_drinks||0}/4 ${hm(f.h_drinks||0,4,true)}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('h_tennis','label')}</span><span class="rpt-row-val">${f.h_tennis||0}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('h_steps','label')}</span><span class="rpt-row-val">${f.h_steps||0}/5 ${hm(f.h_steps||0,5)}</span></div>
+      <div class="rpt-row"><span class="rpt-row-label">${getLabel('h_sleep','label')}</span><span class="rpt-row-val">${f.h_sleep||0}/5 ${hm(f.h_sleep||0,5)}</span></div>
     </div>
     <div style="text-align:center;margin-top:20px;padding-top:16px;border-top:1px solid var(--border)"><div style="font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:2px;color:var(--text-dim)">WEEKLY ACCOUNTABILITY REPORT</div></div>
   `;
